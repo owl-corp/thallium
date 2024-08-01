@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./app:/app/app:ro
+    env_file:
+      - .env
