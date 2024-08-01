@@ -6,4 +6,5 @@ Run `make` from the project root to both install this project's dependencies & i
 
 ## Other make targets
 - `make lint` will run the pre-commit linting against all files in the repository
-- `make lock` wil relock project dependencies and update the [`requirements.txt`](./requirements.txt) file with production dependencies
+- `make lock` wil relock project dependencies, install them to your environment, and update the [`requirements.txt`](./requirements.txt) file with production dependencies
+- `make test` / `make retest` will run the test suite. `retest` will only run the tests that failed on the last test run.

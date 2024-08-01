@@ -1,6 +1,6 @@
 import logging
 
-from app.settings import SETTINGS
+from thallium.settings import SETTINGS
 
 # Console handler prints to terminal
 console_handler = logging.StreamHandler()

@@ -1,8 +1,11 @@
 services:
-  app:
+  thallium:
     build: .
     restart: unless-stopped
+    command: ["thallium.app:app", "--host", "0.0.0.0", "--port", "80", "--reload"]
     volumes:
-      - ./app:/app/app:ro
+      - ./thallium:/thallium/thallium:ro
     env_file:
       - .env
+    ports:
+      - "127.0.0.1:8000:80"

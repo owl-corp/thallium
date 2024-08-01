@@ -4,10 +4,12 @@ version = "1.2.0"
 description = "Distribute printful prizes to winners."
 authors = ["Chris Lovering <chris.lovering.95@gmail.com>"]
 license = "MIT"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "3.12.*"
 
+litestar = { version = "^2.10.0", extras = ["standard"] }
 pydantic = "^2.8.2"
 pydantic-settings = "^2.4.0"
 
@@ -17,6 +19,11 @@ ruff = "^0.5.5"
 
 [tool.poetry.group.dev.dependencies]
 poetry-plugin-export = "*"
+
+[tool.poetry.group.test.dependencies]
+pytest  ="^8.3.2"
+pytest-asyncio = "^0.23.8"
+pytest-xdist = "^3.6.1"
 
 [build-system]
 requires = ["poetry-core>=1.5.0"]
@@ -43,7 +50,14 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["app"]
+known-first-party = ["tests", "thallium"]
 order-by-type = false
 case-sensitive = true
 combine-as-imports = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D103", "S101"]
+
+[tool.pytest.ini_options]
+# addopts = "--ignore=examples"
+asyncio_mode = "auto"
