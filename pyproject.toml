@@ -1,19 +1,19 @@
 [tool.poetry]
-name = "python-template"
+name = "thallium"
 version = "1.2.0"
-description = "A template project for Python applications."
+description = "Distribute printful prizes to winners."
 authors = ["Chris Lovering <chris.lovering.95@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
 python = "3.12.*"
 
-pydantic = "*"
-pydantic-settings = "*"
+pydantic = "^2.8.2"
+pydantic-settings = "^2.4.0"
 
 [tool.poetry.group.linting.dependencies]
-pre-commit = "*"
-ruff = "*"
+pre-commit = "^3.8.0"
+ruff = "^0.5.5"
 
 [tool.poetry.group.dev.dependencies]
 poetry-plugin-export = "*"
