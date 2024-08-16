@@ -11,36 +11,46 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      backend: ${{ steps.changes.outputs.backend }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: changes
+      with:
+        filters: |
+          automation: &automation
+            - '.github/workflows/**'
+            - 'deployments/**'
+          backend:
+            - *automation
+            - 'thallium-backend/**'
+
   generate-inputs:
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
-
     outputs:
       sha-tag: ${{ steps.sha-tag.outputs.sha-tag }}
       lower-repo: ${{ steps.lower-repo.outputs.lower-repo }}
-
     steps:
       - name: Create SHA Container Tag
         id: sha-tag
         run: |
           tag=$(cut -c 1-7 <<< $GITHUB_SHA)
           echo "sha-tag=$tag" >> $GITHUB_OUTPUT
-      # docker/build-push-action doesn't allow capital letters in the URL
-      - name: Get repo in lowercase
-        id: lower-repo
-        run: |
-          echo "lower-repo=${GITHUB_REPOSITORY,,}" >> $GITHUB_OUTPUT
 
   lint:
     uses: ./.github/workflows/lint.yaml
 
-  build:
-    uses: ./.github/workflows/build.yaml
-    needs:
-      - lint
-      - generate-inputs
+  build-backend:
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+    needs: [changes, generate-inputs, lint]
+    uses: ./.github/workflows/build-deploy.yaml
     with:
       sha-tag: ${{ needs.generate-inputs.outputs.sha-tag }}
-      lower-repo: ${{ needs.generate-inputs.outputs.lower-repo }}
+      project: backend
+    secrets: inherit
