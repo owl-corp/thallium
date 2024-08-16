@@ -54,13 +54,14 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["tests", "src"]
+known-first-party = ["tests", "src", "migrations"]
 order-by-type = false
 case-sensitive = true
 combine-as-imports = true
 
 [tool.ruff.lint.per-file-ignores]
-"*/tests/**" = ["D103", "S101"]
+"thallium-backend/tests/**" = ["D103", "S101"]
+"thallium-backend/migrations/*" = ["N999"]
 
 [tool.pytest.ini_options]
 # addopts = "--ignore=examples"

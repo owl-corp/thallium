@@ -27,3 +27,6 @@ test:
 
 retest:
 	pytest -n 4 --lf
+
+revision:
+	cd thallium-backend && poetry run alembic revision --autogenerate -m CHANGEME

@@ -2,6 +2,8 @@
 **
 
 # Except what we need
+!alembic.ini
+!migrations
 !src
 !requirements.txt
 !LICENSE

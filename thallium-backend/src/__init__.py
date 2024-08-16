@@ -1,6 +1,12 @@
+import asyncio
 import logging
+import os
 
 from src.settings import CONFIG
+
+# On Windows, the selector event loop is required for aiodns.
+if os.name == "nt":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 # Console handler prints to terminal
 console_handler = logging.StreamHandler()

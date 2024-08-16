@@ -17,11 +17,14 @@ services:
   thallium:
     build: thallium-backend
     restart: unless-stopped
-    command: ["src.app:fastapi_app", "--host", "0.0.0.0", "--port", "80", "--reload"]
+    command: ["alembic upgrade head && uvicorn src.app:fastapi_app --host 0.0.0.0 --port 8000 --reload"]
     volumes:
       - ./thallium-backend/src:/thallium/src:ro
     env_file:
       - .env
+    environment:
+      BACKEND_DATABASE_URL: postgresql+psycopg_async://thallium:thallium@postgres:5432/thallium
+      BACKEND_TOKEN: suitable-for-development-only
     ports:
       - "8000:80"
     depends_on:
