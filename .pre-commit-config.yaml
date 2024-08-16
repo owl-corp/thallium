@@ -18,7 +18,7 @@ repos:
         description: Checks the validity of the pyproject.toml file.
         entry: poetry check
         language: system
-        files: pyproject.toml
+        files: thallium-backend/pyproject.toml
         pass_filenames: false
         require_serial: true
 

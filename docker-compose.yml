@@ -1,11 +1,29 @@
 services:
-  thallium:
-    build: .
+  postgres:
     restart: unless-stopped
-    command: ["thallium.app:app", "--host", "0.0.0.0", "--port", "80", "--reload"]
-    volumes:
-      - ./thallium:/thallium/thallium:ro
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: thallium
+      POSTGRES_PASSWORD: thallium
+      POSTGRES_USER: thallium
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U thallium"]
+      interval: 2s
+      timeout: 1s
+      retries: 5
+    ports:
+      - "15432:5432"
+
+  thallium:
+    build: thallium-backend
+    restart: unless-stopped
+    command: ["src.app:fastapi_app", "--host", "0.0.0.0", "--port", "80", "--reload"]
+    # volumes:
+    #   - ./thallium:/thallium/thallium:ro
     env_file:
       - .env
     ports:
-      - "127.0.0.1:8000:80"
+      - "8000:80"
+    depends_on:
+      postgres:
+        condition: service_healthy

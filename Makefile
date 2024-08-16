@@ -7,10 +7,10 @@ install:
 
 relock:
 	poetry lock
-	@poetry export --only main --output requirements.txt
+	@poetry export --only main --output thallium-backend/requirements.txt
 
 lintdeps:
-	@pre-commit run --files pyproject.toml poetry.lock requirements.txt
+	@pre-commit run --files pyproject.toml poetry.lock thallium-backend/requirements.txt
 
 lockci: relock lintdeps
 

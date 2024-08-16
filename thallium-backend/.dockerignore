@@ -2,6 +2,6 @@
 **
 
 # Except what we need
-!thallium
+!src
 !requirements.txt
 !LICENSE

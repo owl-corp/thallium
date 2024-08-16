@@ -1,10 +1,10 @@
 import logging
 
-from thallium.settings import SETTINGS
+from src.settings import CONFIG
 
 # Console handler prints to terminal
 console_handler = logging.StreamHandler()
-level = logging.DEBUG if SETTINGS.debug else logging.INFO
+level = logging.DEBUG if CONFIG.debug else logging.INFO
 console_handler.setLevel(level)
 
 # Remove old loggers, if any
@@ -17,6 +17,6 @@ if root.handlers:
 logging.basicConfig(
     format="%(asctime)s - %(name)s %(levelname)s: %(message)s",
     datefmt="%D %H:%M:%S",
-    level=logging.DEBUG if SETTINGS.debug else logging.INFO,
+    level=logging.DEBUG if CONFIG.debug else logging.INFO,
     handlers=[console_handler],
 )
