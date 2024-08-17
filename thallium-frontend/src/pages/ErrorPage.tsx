@@ -2,7 +2,7 @@ import { useRouteError, isRouteErrorResponse } from 'react-router-dom';
 
 import Card from '../components/Card';
 
-const LandingPage = () => {
+const ErrorPage = () => {
     const error = useRouteError();
 
     let title = 'Unexpected Error', message, isUnexpected = false;
@@ -34,4 +34,4 @@ const LandingPage = () => {
     </Card>;
 };
 
-export default LandingPage;
+export default ErrorPage;
