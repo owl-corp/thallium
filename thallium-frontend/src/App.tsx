@@ -1,9 +1,16 @@
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-
-import LandingPage from "./pages/LandingPage"
 import { useEffect, useState } from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 import themes from './themes.tsx';
+
+import Header from "./components/Header";
+
+import LandingPage from "./pages/LandingPage"
+import ErrorPage from "./pages/ErrorPage"
 
 
 const GlobalStyle = createGlobalStyle`
@@ -46,6 +53,14 @@ const ContentContainer = styled.div`
   padding: 1rem;
 `;
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+    errorElement: <ErrorPage />,
+  },
+]);
+
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -65,7 +80,8 @@ function App() {
       <AppContainer>
         <GlobalStyle />
         <ContentContainer>
-          <LandingPage />
+          <Header />
+          <RouterProvider router={router} />
         </ContentContainer>
 
         <BodySeparator />
