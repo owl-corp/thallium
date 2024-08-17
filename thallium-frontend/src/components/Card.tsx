@@ -8,9 +8,7 @@ const CardContainer = styled.div`
   background-color: ${({ theme }) => theme.cardBackgroundColor};
   text-align: left;
 
-  /* hard box shadow to bottom right */
   box-shadow: 10px 10px 0 ${({ theme }) => theme.cardShadow};
-  
 `;
 
 const CardTitle = styled.div`
