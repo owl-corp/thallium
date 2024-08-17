@@ -53,6 +53,12 @@ const ContentContainer = styled.div`
   padding: 1rem;
 `;
 
+const FooterHolder = styled.footer`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -90,11 +96,11 @@ function App() {
 
         <BodySeparator />
 
-        <div>
+        <FooterHolder>
           <p>
             Made with <span role="img" aria-label="aliens">👾</span> by Owl Corp &bull; Thallium {VITE_APP_VERSION} ({VITE_COMMIT_HASH})
           </p>
-        </div>
+        </FooterHolder>
       </AppContainer>
     </ThemeProvider>
   );
