@@ -1,4 +1,18 @@
-const themes = {
+interface Theme {
+    backgroundColor: string;
+    textColor: string;
+    borderColor: string;
+    linkColor: string;
+    cardBackgroundColor: string;
+    cardShadow: string;
+}
+
+interface ThemesStore {
+    light: Theme;
+    dark: Theme;
+}
+
+const themes: ThemesStore = {
     light: {
         backgroundColor: '#f0f0f0',
         textColor: '#000',
@@ -18,3 +32,5 @@ const themes = {
 };
 
 export default themes;
+
+export type { Theme, ThemesStore };

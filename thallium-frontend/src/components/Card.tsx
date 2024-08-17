@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 const CardContainer = styled.div`
   border: 3px solid ${({ theme }) => theme.borderColor};
   padding: 16px;
@@ -28,7 +27,7 @@ interface CardProps {
     children: React.ReactNode;
 }
 
-const Card: React.FC<CardProps> = ({ title, children }) => {
+const Card: React.FC<CardProps> = ({ title, children }: CardProps) => {
     return (
         <CardContainer>
             <CardTitle>{title}</CardTitle>

@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import themes from './themes.tsx';
+import themes from './themes';
 
 import Header from "./components/Header";
 
@@ -68,8 +68,7 @@ function App() {
   const theme = isDarkMode ? themes.dark : themes.light;
 
   useEffect(() => {
-    const prefersDark = window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     setIsDarkMode(prefersDark);
   }, []);

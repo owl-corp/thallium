@@ -1,18 +1,28 @@
-import { useRouteError } from 'react-router-dom';
+import { useRouteError, isRouteErrorResponse } from 'react-router-dom';
 
 import Card from '../components/Card';
 
 const LandingPage = () => {
-    const error: any = useRouteError() || {};
+    const error = useRouteError();
 
-    let title, message, isUnexpected = false;
+    let title = 'Unexpected Error', message, isUnexpected = false;
 
-    if (error.status === 404) {
-        title = 'Not Found';
-        message = 'The requested page could not be found.';
+    if (isRouteErrorResponse(error)) {
+        if (error.status === 404) {
+            title = 'Not Found';
+            message = 'The requested page could not be found.';
+        } else {
+            message = error.statusText;
+        }
+    } else if (error instanceof Error) {
+        message = error.message;
+        isUnexpected = true;
+    } else if (typeof error === 'string') {
+        message = error;
+        isUnexpected = true;
     } else {
-        title = 'Error';
-        message = error.message || error.statusText;
+        console.error(error);
+        message = 'Unknown error';
         isUnexpected = true;
     }
 
