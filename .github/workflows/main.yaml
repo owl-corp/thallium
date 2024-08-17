@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       backend: ${{ steps.changes.outputs.backend }}
+      frontend: ${{ steps.changes.outputs.frontend }}
     steps:
     - uses: actions/checkout@v4
     - uses: dorny/paths-filter@v3
@@ -27,6 +28,9 @@ jobs:
           backend:
             - *automation
             - 'thallium-backend/**'
+          frontend:
+            - *automation
+            - 'thallium-frontend/**'
 
   generate-inputs:
     runs-on: ubuntu-latest
@@ -55,4 +59,14 @@ jobs:
     with:
       sha-tag: ${{ needs.generate-inputs.outputs.sha-tag }}
       project: backend
+    secrets: inherit
+
+  build-frontend:
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
+    needs: [changes, generate-inputs, lint-frontend]
+    uses: ./.github/workflows/build-deploy.yaml
+    with:
+      sha-tag: ${{ needs.generate-inputs.outputs.sha-tag }}
+      project: frontend
+      dockerfile: Dockerfile.development
     secrets: inherit
