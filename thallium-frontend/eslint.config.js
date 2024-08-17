@@ -41,6 +41,10 @@ export default tseslint.config(
       }],
       "semi": ["error", "always"],
       "quotes": ["error", "double"],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { "caughtErrors": "none" },
+      ],
     },
   },
 )
