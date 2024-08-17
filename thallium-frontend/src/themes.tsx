@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+
 interface Theme {
     backgroundColor: string;
     textColor: string;
@@ -16,7 +18,7 @@ const themes: ThemesStore = {
     light: {
         backgroundColor: "#f0f0f0",
         textColor: "#000",
-        borderColor: "#ccc",
+        borderColor: "#838383",
         linkColor: "#7272ff",
         cardBackgroundColor: "#ebebeb",
         cardShadow: "#d0d0d0",

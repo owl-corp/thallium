@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import themes from "./themes";
+import themes from "./themes.tsx";
 
 import Header from "./components/Header";
 
