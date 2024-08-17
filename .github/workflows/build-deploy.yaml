@@ -40,7 +40,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: thallium-${{ inputs.project }}
-          file: ${{ inputs.dockerfile || 'Dockerfile' }}
+          file: thallium-${{ inputs.project }}/${{ inputs.dockerfile || 'Dockerfile' }}
           push: ${{ github.ref == 'refs/heads/main' }}
           cache-from: type=registry,ref=ghcr.io/owl-corp/thallium-${{ inputs.project }}:latest
           cache-to: type=inline
