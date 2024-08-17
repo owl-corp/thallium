@@ -22,6 +22,8 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+        working-directory: thallium-frontend
 
       - name: Lint frontend
         run: pnpm run lint
+        working-directory: thallium-frontend
