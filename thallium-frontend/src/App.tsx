@@ -11,6 +11,7 @@ import Header from "./components/Header";
 
 import LandingPage from "./pages/LandingPage";
 import ErrorPage from "./pages/ErrorPage";
+import DesignSystem from "./pages/DesignSystem";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -37,7 +38,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const AppContainer = styled.div`
-  text-align: center;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -57,8 +57,13 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />
   },
+  {
+    path: "/design-system",
+    element: <DesignSystem />,
+    errorElement: <ErrorPage />
+  }
 ]);
 
 
