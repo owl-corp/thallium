@@ -17,7 +17,7 @@ const CardTitle = styled.div<{ $seamless?: boolean; }>`
   top: -16px;
   left: 16px;
   background-color: ${({ theme }) => theme.cardBackgroundColor};
-  ${({ $seamless, theme }) => $seamless ? "" : `background: linear-gradient(0deg, ${theme.cardBackgroundColor} 0%, ${theme.cardBackgroundColor} 45%, ${theme.backgroundColor} 45%)`};
+  ${({ $seamless, theme }) => $seamless ? "" : `background: linear-gradient(0deg, ${theme.cardBackgroundColor} 0%, ${theme.cardBackgroundColor} 45%, ${theme.backgroundColor} 55%)`};
   padding: 0 8px;
   font-weight: bold;
   z-index: 1;
