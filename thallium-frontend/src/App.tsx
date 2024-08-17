@@ -1,16 +1,16 @@
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { useEffect, useState } from 'react';
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import { useEffect, useState } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
-import themes from './themes';
+import themes from "./themes";
 
 import Header from "./components/Header";
 
-import LandingPage from "./pages/LandingPage"
-import ErrorPage from "./pages/ErrorPage"
+import LandingPage from "./pages/LandingPage";
+import ErrorPage from "./pages/ErrorPage";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -47,7 +47,7 @@ const AppContainer = styled.div`
 
 const BodySeparator = styled.div`
 flex-grow: 1;
-`
+`;
 
 const ContentContainer = styled.div`
   padding: 1rem;
@@ -68,7 +68,7 @@ function App() {
   const theme = isDarkMode ? themes.dark : themes.light;
 
   useEffect(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     setIsDarkMode(prefersDark);
   }, []);
@@ -92,7 +92,7 @@ function App() {
         </div>
       </AppContainer>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

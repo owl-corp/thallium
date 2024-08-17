@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const CardContainer = styled.div`
   border: 3px solid ${({ theme }) => theme.borderColor};
