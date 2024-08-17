@@ -26,18 +26,12 @@ const LandingPage = () => {
         isUnexpected = true;
     }
 
-    return (
-        <>
-            <div>
-                <Card title={title}>
-                    {isUnexpected && <strong>An error occurred:</strong>}
-                    <p>
-                        {message}
-                    </p>
-                </Card>
-            </div>
-        </>
-    );
+    return <Card title={title}>
+        {isUnexpected && <strong>An error occurred:</strong>}
+        <p>
+            {message}
+        </p>
+    </Card>;
 };
 
 export default LandingPage;
