@@ -12,9 +12,42 @@
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
   <noscript>
-    <h1>Hi, we've noticed you're browsing with JavaScript disabled.</h1>
-    <p>We are sorry, but we do not support this at the time.</p>
-    <p>Please enable JavaScript to use our site.</p>
+    <div class="noscript-container">
+      <h1>Hi, we've noticed you're browsing with JavaScript disabled.</h1>
+      <p>We are sorry, but we do not support this at the time.</p>
+      <p>Please enable JavaScript to use our site.</p>
+    </div>
+    <style>
+      body {
+        font-family: "Source Code Pro", monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .noscript-container {
+        margin: 0 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin: 0;
+      }
+
+      p {
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #333;
+          color: #fff;
+        }
+      }
+    </style>
   </noscript>
 </body>
 
