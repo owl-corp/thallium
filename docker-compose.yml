@@ -15,7 +15,10 @@ services:
       - "15432:5432"
 
   thallium-backend:
-    build: thallium-backend
+    build:
+      context: thallium-backend
+      cache_from:
+        - type=registry,ref=ghcr.io/owl-corp/thallium-backend:latest
     restart: unless-stopped
     command: ["alembic upgrade head && uvicorn src.app:fastapi_app --host 0.0.0.0 --port 8000 --reload"]
     volumes:
@@ -35,6 +38,8 @@ services:
     build:
       context: thallium-frontend
       dockerfile: Dockerfile.development
+      cache_from:
+        - type=registry,ref=ghcr.io/owl-corp/thallium-frontend:latest
     restart: unless-stopped
     volumes:
       # Once https://github.com/vitejs/vite/issues/9470 has a nice solution, we can make the mount read-only
