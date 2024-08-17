@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 120 120"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   sodipodi:docname="icon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="4.1146469"
+     inkscape:cx="57.477593"
+     inkscape:cy="66.712893"
+     inkscape:window-width="1920"
+     inkscape:window-height="1133"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#a45dbc;fill-opacity:1;stroke:none;stroke-width:11.6985;stroke-linecap:round"
+       id="rect1"
+       width="120"
+       height="120"
+       x="0"
+       y="0" />
+    <path
+       style="font-size:85.3333px;font-family:'FiraCode Nerd Font';-inkscape-font-specification:'FiraCode Nerd Font, Normal';font-variation-settings:'wdth' 139, 'wght' 800;text-align:center;text-anchor:middle;fill:#ffffff;stroke:#ffffff;stroke-width:5.21953;stroke-linecap:round"
+       d="M 39.848194,35.887872 V 89.625969 H 32.277599 V 35.887872 H 13.460513 v -6.520339 h 45.467332 l -0.787692,6.520339 z m 49.362069,-6.520339 v 48.880663 q 0,3.413332 2.100512,4.857434 2.144273,1.400341 5.513844,1.400341 2.056751,0 3.938461,-0.437607 1.92547,-0.437606 3.80718,-1.181538 l 1.96923,5.382562 q -1.88171,0.918974 -4.68239,1.619145 -2.756927,0.743931 -6.25778,0.743931 -6.126493,0 -9.933671,-3.369571 -3.807178,-3.413332 -3.807178,-9.408543 V 35.887872 H 67.723776 v -6.520339 z"
+       id="text1"
+       aria-label="Tl" />
+  </g>
+</svg>
