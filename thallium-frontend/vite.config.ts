@@ -9,6 +9,7 @@ try {
     .toString().replace(/\n$/, "");
 } catch (e) {
   console.error("Failed to get commit hash");
+  console.error(e);
 }
 
 // https://vitejs.dev/config/
