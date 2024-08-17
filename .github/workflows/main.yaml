@@ -68,5 +68,5 @@ jobs:
     with:
       sha-tag: ${{ needs.generate-inputs.outputs.sha-tag }}
       project: frontend
-      dockerfile: Dockerfile.development
+      dockerfile: thallium-frontend/Dockerfile.development
     secrets: inherit
