@@ -42,12 +42,15 @@ jobs:
           tag=$(cut -c 1-7 <<< $GITHUB_SHA)
           echo "sha-tag=$tag" >> $GITHUB_OUTPUT
 
-  lint:
-    uses: ./.github/workflows/lint.yaml
+  lint-backend:
+    uses: ./.github/workflows/lint-backend.yaml
+
+  lint-frontend:
+    uses: ./.github/workflows/lint-frontend.yaml
 
   build-backend:
     if: ${{ needs.changes.outputs.backend == 'true' }}
-    needs: [changes, generate-inputs, lint]
+    needs: [changes, generate-inputs, lint-backend]
     uses: ./.github/workflows/build-deploy.yaml
     with:
       sha-tag: ${{ needs.generate-inputs.outputs.sha-tag }}
