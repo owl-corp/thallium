@@ -13,13 +13,14 @@ const CardContainer = styled.div`
 
 const CardTitle = styled.div`
   position: absolute;
-  top: -12px;
+  top: -16px;
   left: 16px;
   background-color: ${({ theme }) => theme.cardBackgroundColor};
   background: linear-gradient(0deg, ${({ theme }) => theme.cardBackgroundColor} 0%, ${({ theme }) => theme.cardBackgroundColor} 45%, ${({ theme }) => theme.backgroundColor} 45%);
   padding: 0 8px;
   font-weight: bold;
   z-index: 1;
+  font-size: 1.2em;
 `;
 
 interface CardProps {
