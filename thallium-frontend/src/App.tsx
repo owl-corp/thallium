@@ -87,7 +87,7 @@ function App() {
 
         <div>
           <p>
-            Made with <span role="img" aria-label="aliens">👾</span> by Owl Corp
+            Made with <span role="img" aria-label="aliens">👾</span> by Owl Corp &bull; Thallium {VITE_APP_VERSION} ({VITE_COMMIT_HASH})
           </p>
         </div>
       </AppContainer>
