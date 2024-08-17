@@ -2,8 +2,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import * as child from "child_process";
 
-const commitHash = child.execSync('git rev-parse --short HEAD')
-  .toString().replace(/\n$/, '');
+const commitHash = child.execSync("git rev-parse --short HEAD")
+  .toString().replace(/\n$/, "");
 
 // https://vitejs.dev/config/
 export default defineConfig({
