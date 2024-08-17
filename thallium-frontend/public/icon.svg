@@ -46,8 +46,8 @@
        x="0"
        y="0" />
     <path
-       style="font-size:85.3333px;font-family:'FiraCode Nerd Font';-inkscape-font-specification:'FiraCode Nerd Font, Normal';font-variation-settings:'wdth' 139, 'wght' 800;text-align:center;text-anchor:middle;fill:#ffffff;stroke:#ffffff;stroke-width:5.21953;stroke-linecap:round"
-       d="M 39.848194,35.887872 V 89.625969 H 32.277599 V 35.887872 H 13.460513 v -6.520339 h 45.467332 l -0.787692,6.520339 z m 49.362069,-6.520339 v 48.880663 q 0,3.413332 2.100512,4.857434 2.144273,1.400341 5.513844,1.400341 2.056751,0 3.938461,-0.437607 1.92547,-0.437606 3.80718,-1.181538 l 1.96923,5.382562 q -1.88171,0.918974 -4.68239,1.619145 -2.756927,0.743931 -6.25778,0.743931 -6.126493,0 -9.933671,-3.369571 -3.807178,-3.413332 -3.807178,-9.408543 V 35.887872 H 67.723776 v -6.520339 z"
+       style="font-size:85.3333px;font-family:'FiraCode Nerd Font';-inkscape-font-specification:'FiraCode Nerd Font, Normal';font-variation-settings:'wdth' 139, 'wght' 800;text-align:center;text-anchor:middle;fill:#ffffff;stroke:#ffffff;stroke-width:4.07644;stroke-linecap:round"
+       d="m 44.332618,41.168506 v 41.969279 h -5.91261 V 41.168506 H 23.723925 v -5.092363 h 35.509838 l -0.615185,5.092363 z m 38.551615,-5.092363 v 38.175638 q 0,2.665801 1.640493,3.79364 1.67467,1.093662 4.306294,1.093662 1.606316,0 3.075925,-0.34177 1.503786,-0.341768 2.973395,-0.922777 l 1.537963,4.203764 q -1.46961,0.717715 -3.656932,1.264546 -2.153151,0.581008 -4.887305,0.581008 -4.784772,0 -7.758165,-2.631624 -2.973394,-2.665801 -2.973394,-7.348041 V 41.168506 h -11.03915 v -5.092363 z"
        id="text1"
        aria-label="Tl" />
   </g>
