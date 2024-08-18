@@ -15,6 +15,13 @@ async def get_templates(client: PrintfulClient) -> dict:
     return resp.json()
 
 
+@router.get("/variants/{variant_id}")
+async def get_variant(client: PrintfulClient, variant_id: int) -> dict:
+    """Return all templates in printful."""
+    resp = await client.get(f"/products/variant/{variant_id}")
+    return resp.json()
+
+
 @router.get("/oauth-scopes-v1")
 async def get_oauth_scopes(client: PrintfulClient) -> dict:
     """Return all templates in printful."""

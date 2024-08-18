@@ -28,6 +28,7 @@ services:
     environment:
       BACKEND_DATABASE_URL: postgresql+psycopg_async://thallium:thallium@postgres:5432/thallium
       BACKEND_TOKEN: suitable-for-development-only
+      BACKEND_APP_PREFIX: /api
     ports:
       - "8000:8000"
     depends_on:
@@ -47,3 +48,15 @@ services:
       - /app/node_modules
     ports:
       - "5173:5173"
+
+  thallium-caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    volumes:
+      - ./thallium-caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./thallium-caddy/data:/data
+    ports:
+      - "80:80"
+    depends_on:
+      - thallium-backend
+      - thallium-frontend

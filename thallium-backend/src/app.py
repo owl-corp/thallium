@@ -9,7 +9,7 @@ from src.settings import CONFIG
 
 log = logging.getLogger(__name__)
 
-fastapi_app = FastAPI(debug=CONFIG.debug)
+fastapi_app = FastAPI(debug=CONFIG.debug, root_path=CONFIG.app_prefix)
 fastapi_app.include_router(top_level_router)
 
 
