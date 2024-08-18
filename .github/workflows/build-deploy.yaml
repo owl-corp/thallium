@@ -50,3 +50,31 @@ jobs:
             ghcr.io/owl-corp/thallium-${{ inputs.project }}:${{ inputs.sha-tag }}
           build-args: |
             git_sha=${{ github.sha }}
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Checkout Kubernetes repository
+        uses: actions/checkout@v4
+        with:
+          repository: python-discord/infra
+          path: infra
+
+      - uses: azure/setup-kubectl@v4
+
+      - name: Authenticate with Kubernetes
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+
+      - name: Deploy to Kubernetes
+        uses: azure/k8s-deploy@v5
+        with:
+          namespace: merch
+          manifests: |
+            infra/kubernetes/namespaces/merch/deployment.yaml
+          images: 'ghcr.io/owl-corp/thallium:${{ inputs.sha-tag }}'
