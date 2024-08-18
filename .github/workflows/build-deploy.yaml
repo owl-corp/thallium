@@ -55,7 +55,7 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' && inputs.project == 'backend' }}
     steps:
       - name: Checkout Kubernetes repository
         uses: actions/checkout@v4
@@ -77,4 +77,4 @@ jobs:
           namespace: merch
           manifests: |
             infra/kubernetes/namespaces/merch/deployment.yaml
-          images: 'ghcr.io/owl-corp/thallium:${{ inputs.sha-tag }}'
+          images: 'ghcr.io/owl-corp/thallium-${{ inputs.project }}:${{ inputs.sha-tag }}'
