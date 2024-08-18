@@ -2,6 +2,7 @@ import typing
 from collections.abc import AsyncGenerator
 from logging import getLogger
 
+import httpx
 import pydantic
 import pydantic_settings
 from fastapi import Depends
@@ -24,7 +25,8 @@ class _Config(
     git_sha: str = "development"
 
     database_url: pydantic.SecretStr
-    token: pydantic.SecretStr
+    super_admin_token: pydantic.SecretStr
+    printful_token: pydantic.SecretStr
 
 
 CONFIG = _Config()
@@ -37,6 +39,16 @@ class Connections:
     DB_SESSION_MAKER = async_sessionmaker(DB_ENGINE)
 
 
+async def _get_printful_client() -> AsyncGenerator[httpx.AsyncClient, None]:
+    """Yield an authenticated httpx client for printful, for use with a FastAPI dependency."""
+    client = httpx.AsyncClient(
+        headers={"Authorization": f"Bearer {CONFIG.printful_token.get_secret_value()}"},
+        base_url="https://api.printful.com",
+    )
+    async with client as c:
+        yield c
+
+
 async def _get_db_session() -> AsyncGenerator[AsyncSession, None]:
     """Yield a database session, for use with a FastAPI dependency."""
     async with Connections.DB_SESSION_MAKER() as session, session.begin():
@@ -44,3 +56,4 @@ async def _get_db_session() -> AsyncGenerator[AsyncSession, None]:
 
 
 DBSession = typing.Annotated[AsyncSession, Depends(_get_db_session)]
+PrintfulClient = typing.Annotated[httpx.AsyncClient, Depends(_get_printful_client)]

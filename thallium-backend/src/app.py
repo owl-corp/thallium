@@ -4,12 +4,13 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
+from src.routes import top_level_router
 from src.settings import CONFIG
 
 log = logging.getLogger(__name__)
 
-
 fastapi_app = FastAPI(debug=CONFIG.debug)
+fastapi_app.include_router(top_level_router)
 
 
 @fastapi_app.get("/heartbeat")
