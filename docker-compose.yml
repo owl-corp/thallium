@@ -29,7 +29,7 @@ services:
       BACKEND_DATABASE_URL: postgresql+psycopg_async://thallium:thallium@postgres:5432/thallium
       BACKEND_TOKEN: suitable-for-development-only
     ports:
-      - "8000:80"
+      - "8000:8000"
     depends_on:
       postgres:
         condition: service_healthy
