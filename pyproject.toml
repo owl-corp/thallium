@@ -19,6 +19,7 @@ pydantic = "^2.8.2"
 pydantic-settings = "^2.4.0"
 pyjwt = "^2.9.0"
 uvicorn = "^0.30.6"
+scalar-fastapi = "^1.0.3"
 
 [tool.poetry.group.linting.dependencies]
 pre-commit = "^3.8.0"
