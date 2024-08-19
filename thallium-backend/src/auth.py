@@ -32,14 +32,14 @@ class TokenAuth(HTTPBase):
         allow_vouchers: bool = False,
         allow_regular_users: bool = False,
     ) -> None:
-        super().__init__(scheme="token", auto_error=auto_error)
+        super().__init__(scheme="bearer", auto_error=auto_error)
         self.allow_vouchers = allow_vouchers
         self.allow_regular_users = allow_regular_users
 
     async def __call__(self, request: Request) -> HTTPAuthorizationCredentials:
         """Parse the token in the auth header, and check it matches with the expected token."""
         creds: HTTPAuthorizationCredentials = await super().__call__(request)
-        if creds.scheme.lower() != "token":
+        if creds.scheme.lower() != "bearer":
             raise HTTPException(
                 status_code=401,
                 detail="Incorrect scheme passed",
