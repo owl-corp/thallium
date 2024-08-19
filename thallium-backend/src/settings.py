@@ -33,6 +33,8 @@ class _Config(
     app_prefix: str = ""
     templates: Jinja2Templates = Jinja2Templates(directory="src/templates")
 
+    cors_origins: list[str] = []
+
 
 CONFIG = _Config()
 
