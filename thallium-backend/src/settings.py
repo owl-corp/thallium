@@ -29,7 +29,7 @@ class _Config(
     super_admin_token: pydantic.SecretStr
     printful_token: pydantic.SecretStr
 
-    app_prefix: str = "/"
+    app_prefix: str = ""
 
 
 CONFIG = _Config()
