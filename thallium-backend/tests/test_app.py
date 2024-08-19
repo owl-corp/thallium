@@ -1,9 +1,9 @@
-from fastapi.testclient import TestClient
+import pytest
+from httpx import AsyncClient
 
-from src.app import fastapi_app
 
-
-def test_heartbeat() -> None:
+@pytest.mark.asyncio()
+async def test_heartbeat(http_client: AsyncClient) -> None:
     """Ensure the heartbeat works."""
-    with TestClient(app=fastapi_app) as client:
-        assert client.get("/heartbeat").json() == {"detail": "I am alive!"}
+    resp = await http_client.get("/heartbeat")
+    assert resp.json() == {"detail": "I am alive!"}
