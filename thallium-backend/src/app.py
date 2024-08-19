@@ -44,6 +44,6 @@ async def add_process_time_and_security_headers(
     response.headers["Content-Security-Policy"] = "default-src 'self'"
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["Permissions-Policy"] = (
-        "camera=(), display-capture(), fullscreen(), geolocation=(), microphone(), screen-wake-lock(), web-share()"
+        "camera=(), display-capture=(), fullscreen=(), geolocation=(), microphone=(), screen-wake-lock=(), web-share=()"
     )
     return response
