@@ -45,7 +45,7 @@ class TokenAuth(HTTPBase):
                 detail="Incorrect scheme passed",
             )
         if self.allow_regular_users and creds.credentials == CONFIG.super_admin_token.get_secret_value():
-            request.state.user = User(user_id=uuid4(), permissions=~UserPermission(0))
+            request.state.user = User(id=uuid4(), permissions=~UserPermission(0))
             return
 
         jwt_data = verify_jwt(
