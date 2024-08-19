@@ -42,7 +42,7 @@ async def add_process_time_and_security_headers(
     response.headers["Strict-Transport-Security"] = "max-age=31536000"
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Content-Security-Policy"] = (
-        "default-src 'self'; script-src https://cdn.jsdelivr.net/; style-src https://cdn.jsdelivr.net/;"
+        "default-src 'self'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/; style-src https://cdn.jsdelivr.net/;"
     )
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["Permissions-Policy"] = (
