@@ -34,7 +34,9 @@ def health_check() -> JSONResponse:
 
 def build_url(request: Request, path: str = "") -> str:
     """Build a URL from a request, for OpenAPI + Scalar."""
-    return f"{request.url.scheme}://{request.headers['Host']}{CONFIG.app_prefix}{path}"
+    scheme = request.headers.get("x-forwarded-proto", request.url.scheme)
+
+    return f"{scheme}://{request.headers['Host']}{CONFIG.app_prefix}{path}"
 
 
 @fastapi_app.get("/docs", include_in_schema=False)
