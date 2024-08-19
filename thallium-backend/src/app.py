@@ -47,6 +47,8 @@ async def scalar_html(request: Request) -> HTMLResponse:
         title=fastapi_app.title,
         scalar_favicon_url=build_url(request, "/static/favicons/favicon.ico"),
         servers=[{"url": build_url(request), "description": "Thallium"}],
+        hide_download_button=True,
+        hide_models=True,
     )
 
 
