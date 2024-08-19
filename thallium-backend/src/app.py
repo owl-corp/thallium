@@ -74,6 +74,7 @@ async def add_process_time_and_security_headers(
         " style-src 'unsafe-inline';"
         " font-src https://fonts.scalar.com;"
         " img-src 'self';"
+        " connect-src 'self';"
     )
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["Permissions-Policy"] = (
