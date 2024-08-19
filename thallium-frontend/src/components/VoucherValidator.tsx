@@ -10,6 +10,12 @@ const VoucherDetails = styled.div<{ $some: boolean }>`
     overflow: hidden;
 `;
 
+const VoucherID = styled.span`
+background-color: ${({ theme }) => theme.cardShadow};
+padding: 4px;
+font-weight: bold;
+`;
+
 const VoucherValidator = () => {
     const [voucherCode, setVoucherCode] = useState("");
     const [foundVoucher, setFoundVoucher] = useState<Voucher | null>(null);
@@ -53,6 +59,7 @@ const VoucherValidator = () => {
                 {foundVoucher && (
                     <>
                         <h3>Voucher Information</h3>
+                        <p>ID: <VoucherID>{foundVoucher.id}</VoucherID></p>
                         <p>Voucher Code: {foundVoucher.voucher_code}</p>
                         <p>Active: {foundVoucher.active ? "Yes" : "No"}</p>
                         <p>Balance: {foundVoucher.balance}</p>
