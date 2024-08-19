@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 
 
 @authenticated_router.get("/me")
-async def get_vouchers(request: Request, db: DBSession) -> Voucher | None:
+async def get_current_voucher(request: Request, db: DBSession) -> Voucher | None:
     """Get the voucher for the currently authenticated voucher id."""
     stmt = select(DBVoucher).where(DBVoucher.id == request.state.voucher_id)
     res = await db.execute(stmt)
