@@ -7,7 +7,6 @@ from fastapi import FastAPI, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse
-from fastapi.staticfiles import StaticFiles
 from scalar_fastapi import get_scalar_api_reference
 
 from src.routes import top_level_router
@@ -24,7 +23,6 @@ fastapi_app = FastAPI(
     redoc_url=None,
 )
 fastapi_app.include_router(top_level_router)
-fastapi_app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
 fastapi_app.add_middleware(
     CORSMiddleware,
@@ -35,7 +33,7 @@ fastapi_app.add_middleware(
 )
 
 
-@fastapi_app.get("/heartbeat")
+@fastapi_app.get("/heartbeat", include_in_schema=False)
 def health_check() -> JSONResponse:
     """Return basic response, for use as a health check."""
     return JSONResponse({"detail": "I am alive!"})
@@ -45,7 +43,7 @@ def build_url(request: Request, path: str = "") -> str:
     """Build a URL from a request, for OpenAPI + Scalar."""
     scheme = request.headers.get("x-forwarded-proto", request.url.scheme)
 
-    return f"{scheme}://{request.headers['Host']}{CONFIG.app_prefix}{path}"
+    return f"{scheme}://{request.headers["Host"]}{CONFIG.app_prefix}{path}"
 
 
 @fastapi_app.get("/docs", include_in_schema=False)
