@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped
 
 from .base import AuditBase, Base
 
@@ -8,5 +8,4 @@ class User(AuditBase, Base):
 
     __tablename__ = "users"
 
-    user_id: Mapped[int] = mapped_column(primary_key=True)
-    is_admin: Mapped[bool]
+    permissions: Mapped[int]

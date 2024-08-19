@@ -1,10 +1,13 @@
 import logging
 
 from fastapi import APIRouter
+from sqlalchemy import select
 
-from src.settings import PrintfulClient
+from src.dto import Voucher
+from src.orm import Voucher as DBVoucher
+from src.settings import DBSession, PrintfulClient
 
-router = APIRouter(tags=["debug"])
+router = APIRouter(tags=["debug"], prefix="/debug")
 log = logging.getLogger(__name__)
 
 
@@ -34,3 +37,13 @@ async def get_v2_oauth_scopes(client: PrintfulClient) -> dict:
     """Return all templates in printful."""
     resp = await client.get("/v2/oauth-scopes")
     return resp.json()
+
+
+@router.get("/vouchers")
+async def get_vouchers(db: DBSession, *, only_active: bool = True) -> list[Voucher]:
+    """Return all templates in printful."""
+    stmt = select(DBVoucher)
+    if only_active:
+        stmt = stmt.where(DBVoucher.active)
+    res = await db.execute(stmt)
+    return res.scalars().all()

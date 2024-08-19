@@ -1,4 +1,4 @@
-.PHONY: all install relock lock lockci lint lintdeps precommit test retest
+.PHONY: all install relock lock lockci lint lintdeps precommit test retest seed
 
 all: install precommit lint
 
@@ -27,6 +27,9 @@ test:
 
 retest:
 	pytest -n 4 --lf
+
+seed:
+	cd thallium-backend && poetry run python -m scripts.seed
 
 revision:
 	cd thallium-backend && poetry run alembic revision --autogenerate -m CHANGEME

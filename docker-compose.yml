@@ -20,7 +20,7 @@ services:
       cache_from:
         - type=registry,ref=ghcr.io/owl-corp/thallium-backend:latest
     restart: unless-stopped
-    command: ["alembic upgrade head && uvicorn src.app:fastapi_app --host 0.0.0.0 --port 8000 --reload"]
+    command: ["alembic upgrade head && uvicorn src.app:fastapi_app --host 0.0.0.0 --port 8000 --reload --no-server-header"]
     volumes:
       - ./thallium-backend/src:/thallium/src:ro
     env_file:
@@ -29,6 +29,7 @@ services:
       BACKEND_DATABASE_URL: postgresql+psycopg_async://thallium:thallium@postgres:5432/thallium
       BACKEND_TOKEN: suitable-for-development-only
       BACKEND_APP_PREFIX: /api
+      BACKEND_SIGNING_KEY: super-secure-key
     ports:
       - "8000:8000"
     depends_on:

@@ -2,13 +2,13 @@
 
 import re
 from datetime import datetime
-from uuid import UUID, uuid4
+from uuid import UUID
 
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncAttrs
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.schema import MetaData
-from sqlalchemy.sql import func
+from sqlalchemy.sql import func, text
 from sqlalchemy.types import DateTime
 
 NAMING_CONVENTIONS = {
@@ -35,7 +35,7 @@ class Base(AsyncAttrs, DeclarativeBase):
 class AuditBase:
     """Common columns for a table with UUID PK and datetime audit columns."""
 
-    id: Mapped[UUID] = mapped_column(default=uuid4, primary_key=True)
+    id: Mapped[UUID] = mapped_column(server_default=text("gen_random_uuid()"), primary_key=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),

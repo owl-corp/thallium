@@ -1,6 +1,8 @@
 import logging
+import time
+from collections.abc import Awaitable, Callable
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
@@ -24,3 +26,19 @@ def pydantic_validation_error(request: Request, error: RequestValidationError) -
     """Raise a warning for pydantic validation errors, before returning."""
     log.warning("Error from %s: %s", request.url, error)
     return JSONResponse({"error": str(error)}, status_code=422)
+
+
+@fastapi_app.middleware("http")
+async def add_process_time_and_security_headers(
+    request: Request,
+    call_next: Callable[[Request], Awaitable[Response]],
+) -> Response:
+    """Add process time and some security headers before sending the response."""
+    start_time = time.perf_counter()
+    response = await call_next(request)
+    response.headers["X-Process-Time"] = str(time.perf_counter() - start_time)
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    return response

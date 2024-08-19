@@ -23,6 +23,7 @@ class _Config(
 
     debug: bool = False
     git_sha: str = "development"
+    signing_key: pydantic.SecretStr
 
     database_url: pydantic.SecretStr
     super_admin_token: pydantic.SecretStr
