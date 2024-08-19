@@ -7,7 +7,7 @@ from uuid import uuid4
 import jwt
 from fastapi import HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials
-from fastapi.security.http import HTTPBase
+from fastapi.security.http import HTTPBearer
 
 from src.dto.users import User, UserPermission
 from src.settings import CONFIG
@@ -22,7 +22,7 @@ class UserTypes(IntFlag):
     REGULAR_USER = 2**1
 
 
-class TokenAuth(HTTPBase):
+class TokenAuth(HTTPBearer):
     """Ensure all requests with this auth enabled include an auth header with the expected token."""
 
     def __init__(
@@ -32,7 +32,7 @@ class TokenAuth(HTTPBase):
         allow_vouchers: bool = False,
         allow_regular_users: bool = False,
     ) -> None:
-        super().__init__(scheme="bearer", auto_error=auto_error)
+        super().__init__(scheme_name="bearer", bearerFormat="JWT", auto_error=auto_error)
         self.allow_vouchers = allow_vouchers
         self.allow_regular_users = allow_regular_users
 
