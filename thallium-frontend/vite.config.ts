@@ -17,6 +17,6 @@ export default defineConfig({
   define: {
     VITE_APP_VERSION: JSON.stringify(process.env.npm_package_version),
     VITE_COMMIT_HASH: JSON.stringify(commitHash),
-    THALLIUM_BASE_URL: JSON.stringify(process.env.THALLIUM_API_URL ?? "/api"),
+    THALLIUM_BASE_URL: JSON.stringify(process.env.THALLIUM_BASE_URL ?? "/api"),
   }
 });
