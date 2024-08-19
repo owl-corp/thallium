@@ -5,6 +5,7 @@ from collections.abc import Awaitable, Callable
 
 from fastapi import FastAPI, Request, Response
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from scalar_fastapi import get_scalar_api_reference
@@ -24,6 +25,14 @@ fastapi_app = FastAPI(
 )
 fastapi_app.include_router(top_level_router)
 fastapi_app.mount("/static", StaticFiles(directory="src/static"), name="static")
+
+fastapi_app.add_middleware(
+    CORSMiddleware,
+    allow_origins=CONFIG.cors_origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+)
 
 
 @fastapi_app.get("/heartbeat")
