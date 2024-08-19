@@ -319,6 +319,9 @@ python-dotenv==1.0.1 ; python_full_version >= "3.12.0" and python_full_version <
 rfc3986[idna2008]==1.5.0 ; python_full_version >= "3.12.0" and python_full_version < "4.0.0" \
     --hash=sha256:270aaf10d87d0d4e095063c65bf3ddbc6ee3d0b226328ce21e036f946e421835 \
     --hash=sha256:a86d6e1f5b1dc238b218b012df0aa79409667bb209e58da56d0b94704e712a97
+scalar-fastapi==1.0.3 ; python_full_version >= "3.12.0" and python_full_version < "4.0.0" \
+    --hash=sha256:4a47a140795097ad034518ce0e32940f2c54f0f4bc60e4c3289ca30a7e6f954d \
+    --hash=sha256:9e9cb8398e298cd435a0171eebe1675b8899eb21e47c238db0d48783143f0ffb
 sniffio==1.3.1 ; python_full_version >= "3.12.0" and python_full_version < "4.0.0" \
     --hash=sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2 \
     --hash=sha256:f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc
