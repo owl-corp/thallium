@@ -1,4 +1,5 @@
 import Card from "../components/Card";
+import VoucherValidator from "../components/VoucherValidator";
 
 const LandingPage = () => {
     return (
@@ -22,6 +23,8 @@ const LandingPage = () => {
                     You can keep track of the development progress on the <a href="https://github.com/owl-corp/thallium">GitHub repository</a>.
                 </p>
             </Card>
+
+            <VoucherValidator />
         </>
     );
 };
