@@ -37,7 +37,7 @@ jobs:
       - name: Fetch project version (Backend)
         if: ${{ inputs.project == 'backend' }}
         run: >-
-          echo "THALLIUM_SEMVER=$(poetry version -s)" >> $GITHUB_ENV
+          echo "THALLIUM_SEMVER=$(cat pyproject.toml | grep '^version =') | grep -Po '(\d+\.){2}\d+')" >> $GITHUB_ENV
 
       # Build and push the container to the GitHub Container
       # Repository. The container will be tagged as "latest"
