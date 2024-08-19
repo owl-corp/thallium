@@ -44,7 +44,8 @@ async def add_process_time_and_security_headers(
     response.headers["Content-Security-Policy"] = (
         "default-src 'self';"
         " script-src 'unsafe-inline' https://cdn.jsdelivr.net/ https://unpkg.com/;"
-        " style-src https://cdn.jsdelivr.net/ https://fonts.googleapis.com/;"
+        " style-src 'self' https://cdn.jsdelivr.net/ https://fonts.googleapis.com/;"
+        " font-src https://fonts.gstatic.com/;"
         " img-src 'self' data:;"
     )
     response.headers["Referrer-Policy"] = "no-referrer"
