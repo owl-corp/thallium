@@ -7,6 +7,9 @@ interface Theme {
     linkColor: string;
     cardBackgroundColor: string;
     cardShadow: string;
+    accent: string;
+    inputBackgroundColor: string;
+    inputPlaceholderColor: string;
 }
 
 interface ThemesStore {
@@ -14,14 +17,21 @@ interface ThemesStore {
     dark: Theme;
 }
 
+const commonTheme = {
+    accent: "#7e5da3",
+};
+
 const themes: ThemesStore = {
     light: {
         backgroundColor: "#f0f0f0",
         textColor: "#000",
         borderColor: "#838383",
         linkColor: "#7272ff",
-        cardBackgroundColor: "#ebebeb",
+        cardBackgroundColor: "#dddddd",
         cardShadow: "#d0d0d0",
+        inputBackgroundColor: "#fff",
+        inputPlaceholderColor: "#949494",
+        ...commonTheme,
     },
     dark: {
         backgroundColor: "#333",
@@ -30,6 +40,9 @@ const themes: ThemesStore = {
         linkColor: "#8f8fff",
         cardBackgroundColor: "#2c2c2c",
         cardShadow: "#242323",
+        inputBackgroundColor: "#444",
+        inputPlaceholderColor: "#acacac",
+        ...commonTheme,
     },
 };
 
