@@ -17,5 +17,8 @@ HEALTHCHECK --start-period=5s --interval=30s --timeout=1s CMD curl http://localh
 ARG git_sha="development"
 ENV GIT_SHA=$git_sha
 
+ARG thallium_semver="0.0.0"
+ENV THALLIUM_VERSION="$thallium_semver"
+
 ENTRYPOINT ["/bin/bash", "-c"]
 CMD ["alembic upgrade head && uvicorn src.app:fastapi_app --host 0.0.0.0 --port 8000 --no-server-header"]
