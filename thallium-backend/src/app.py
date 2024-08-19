@@ -41,7 +41,7 @@ async def add_process_time_and_security_headers(
     response.headers["X-XSS-Protection"] = "1; mode=block"
     response.headers["Strict-Transport-Security"] = "max-age=31536000"
     response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["Content-Security-Policy"] = "default-src 'self'"
+    response.headers["Content-Security-Policy"] = "default-src 'self'; script-src https://cdn.jsdelivr.net/; style-src https://cdn.jsdelivr.net/;"
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["Permissions-Policy"] = (
         "camera=(), display-capture=(), fullscreen=(), geolocation=(), microphone=(), screen-wake-lock=(), web-share=()"
