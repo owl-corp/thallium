@@ -5,6 +5,7 @@ from collections.abc import Awaitable, Callable
 from fastapi import FastAPI, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from src.routes import top_level_router
 from src.settings import CONFIG
@@ -12,6 +13,7 @@ from src.settings import CONFIG
 log = logging.getLogger(__name__)
 
 fastapi_app = FastAPI(debug=CONFIG.debug, root_path=CONFIG.app_prefix)
+fastapi_app.mount("/static", StaticFiles(directory="src/static"), name="static")
 fastapi_app.include_router(top_level_router)
 
 

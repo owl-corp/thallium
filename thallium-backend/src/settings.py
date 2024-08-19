@@ -6,6 +6,7 @@ import httpx
 import pydantic
 import pydantic_settings
 from fastapi import Depends
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 log = getLogger(__name__)
@@ -30,6 +31,7 @@ class _Config(
     printful_token: pydantic.SecretStr
 
     app_prefix: str = ""
+    templates: Jinja2Templates = Jinja2Templates(directory="src/templates")
 
 
 CONFIG = _Config()
