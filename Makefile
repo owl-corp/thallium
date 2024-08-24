@@ -23,10 +23,10 @@ precommit:
 	poetry run pre-commit install
 
 test:
-	pytest --ff
+	pytest --ff thallium-backend
 
 retest:
-	pytest --lf
+	pytest --lf thallium-backend
 
 seed:
 	cd thallium-backend && poetry run python -m scripts.seed
