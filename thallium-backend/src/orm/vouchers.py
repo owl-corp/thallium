@@ -3,10 +3,10 @@ from decimal import Decimal
 from sqlalchemy import Index, text
 from sqlalchemy.orm import Mapped, mapped_column
 
-from .base import AuditBase, Base
+from .base import AuditBase, Base, UUIDBase
 
 
-class Voucher(AuditBase, Base):
+class Voucher(UUIDBase, AuditBase, Base):
     """A valid voucher in the database."""
 
     __tablename__ = "vouchers"

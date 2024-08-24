@@ -32,10 +32,15 @@ class Base(AsyncAttrs, DeclarativeBase):
             setattr(self, key, value)
 
 
+class UUIDBase:
+    """Adds a pre-populated UUID as the tables PK."""
+
+    id: Mapped[UUID] = mapped_column(server_default=text("gen_random_uuid()"), primary_key=True)
+
+
 class AuditBase:
     """Common columns for a table with UUID PK and datetime audit columns."""
 
-    id: Mapped[UUID] = mapped_column(server_default=text("gen_random_uuid()"), primary_key=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
