@@ -8,9 +8,11 @@ import jwt
 from fastapi import HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials
 from fastapi.security.http import HTTPBearer
+from sqlalchemy import select
 
-from src.dto.users import User, UserPermission
-from src.settings import CONFIG
+from src.dto import User, UserPermission, Voucher
+from src.orm import User as DBUser, Voucher as DBVoucher
+from src.settings import CONFIG, DBSession
 
 log = logging.getLogger(__name__)
 
@@ -36,7 +38,7 @@ class TokenAuth(HTTPBearer):
         self.allow_vouchers = allow_vouchers
         self.allow_regular_users = allow_regular_users
 
-    async def __call__(self, request: Request) -> HTTPAuthorizationCredentials:
+    async def __call__(self, request: Request, db: DBSession) -> HTTPAuthorizationCredentials:
         """Parse the token in the auth header, and check it matches with the expected token."""
         creds: HTTPAuthorizationCredentials = await super().__call__(request)
         if creds.scheme.lower() != "bearer":
@@ -58,10 +60,22 @@ class TokenAuth(HTTPBearer):
                 status_code=403,
                 detail="Invalid authentication credentials",
             )
-        if jwt_data["iss"] == "thallium:user":
-            request.state.user_id = jwt_data["sub"]
+        await self.attach_auth_info_to_state(jwt_data, request, db)
+
+    async def attach_auth_info_to_state(self, jwt_data: dict, request: Request, db: DBSession) -> None:
+        """Attach the auth info of the requesting user to the state object."""
+        requester_id = jwt_data["sub"]
+        table = DBUser if jwt_data["iss"] == "thallium:user" else DBVoucher
+
+        stmt = select(table).where(table.id == requester_id)
+        res = await db.scalar(stmt)
+
+        if isinstance(res, DBUser):
+            request.state.user = User.model_validate(res.__dict__)
+        elif isinstance(res, DBVoucher):
+            request.state.voucher = Voucher.model_validate(res.__dict__)
         else:
-            request.state.voucher_id = jwt_data["sub"]
+            raise HTTPException(403, "Your user no longer exists")
 
 
 def build_jwt(
@@ -108,3 +122,26 @@ def verify_jwt(
         raise HTTPException(401, "Invalid JWT passed") from e
     except (jwt.ImmatureSignatureError, jwt.ExpiredSignatureError) as e:
         raise HTTPException(401, "JWT not valid for current time") from e
+
+
+class MissingPermissionsError(HTTPException):
+    """Raised when a user is missing the required permissions."""
+
+    def __init__(self) -> None:
+        super().__init__(403, "Missing permissions for this resource.")
+
+
+class HasPermission:
+    """
+    Check the requesting user has all specified permissions.
+
+    Raises MissingPermissions if not.
+    """
+
+    def __init__(self, required_permissions: UserPermission) -> None:
+        self.required_permissions = required_permissions
+
+    async def __call__(self, request: Request) -> None:
+        """Check the requesting user has all specified permissions."""
+        if not request.state.user.permissions & self.required_permissions == self.required_permissions:
+            raise MissingPermissionsError
