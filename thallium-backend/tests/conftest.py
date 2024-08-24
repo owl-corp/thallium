@@ -4,31 +4,32 @@ import pytest
 from fastapi import FastAPI
 from httpx import AsyncClient
 from sqlalchemy import text
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, create_async_engine
 
 from src.app import fastapi_app
 from src.orm import Base
 from src.settings import CONFIG, Connections, _get_db_session
 
-db_url = CONFIG.database_url.get_secret_value()
-test_db_url = db_url + "_test"
-DB_ENGINE = create_async_engine(test_db_url, isolation_level="REPEATABLE READ", echo=False)
-DB_SESSION_MAKER = async_sessionmaker(DB_ENGINE)
-
 
 @pytest.fixture(scope="session")
-async def _create_test_database_engine() -> AsyncGenerator:
+async def test_database_engine() -> AsyncEngine:
     """Yield back a Database engine object."""
-    create_engine = Connections.DB_ENGINE.execution_options(isolation_level="AUTOCOMMIT", echo=False)
-    async with create_engine.connect() as conn:
-        await conn.execute(text(f"DROP DATABASE IF EXISTS {DB_ENGINE.url.database}"))
-        await conn.execute(text(f"CREATE DATABASE {DB_ENGINE.url.database}"))
+    test_db_url = CONFIG.database_url.get_secret_value() + "_test"
+    test_db_engine = create_async_engine(test_db_url, isolation_level="REPEATABLE READ", echo=False)
+
+    # Use the engine from the main app to create the test DB
+    main_engine = Connections.DB_ENGINE.execution_options(isolation_level="AUTOCOMMIT", echo=False)
+    async with main_engine.connect() as conn:
+        await conn.execute(text(f"DROP DATABASE IF EXISTS {test_db_engine.url.database}"))
+        await conn.execute(text(f"CREATE DATABASE {test_db_engine.url.database}"))
+
+    return test_db_engine
 
 
 @pytest.fixture()
-async def db_session(_create_test_database_engine: None) -> AsyncGenerator[AsyncSession]:
+async def db_session(test_database_engine: AsyncEngine) -> AsyncGenerator[AsyncSession]:
     """Yield an Asynchronous database session."""
-    async with DB_ENGINE.begin() as conn:
+    async with test_database_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
         async with AsyncSession(bind=conn, expire_on_commit=False) as session:
