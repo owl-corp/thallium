@@ -12,7 +12,6 @@ jobs:
         uses: HassanAbouelela/actions/setup-python@setup-python_v1.6.0
         with:
           python_version: "3.12"
-          install_args: "--only linting --only test"
 
       - name: Ensure requirements.txt is up to date
         shell: bash
