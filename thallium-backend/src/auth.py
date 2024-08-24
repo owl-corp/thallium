@@ -138,10 +138,13 @@ class HasPermission:
     Raises MissingPermissions if not.
     """
 
-    def __init__(self, required_permissions: UserPermission) -> None:
+    def __init__(self, required_permissions: UserPermission, *, allow_vouchers: bool = False) -> None:
         self.required_permissions = required_permissions
+        self.allow_vouchers = allow_vouchers
 
     async def __call__(self, request: Request) -> None:
         """Check the requesting user has all specified permissions."""
+        if hasattr(request.state, "voucher") and self.allow_vouchers:
+            return
         if not request.state.user.permissions & self.required_permissions == self.required_permissions:
             raise MissingPermissionsError
