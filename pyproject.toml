@@ -31,7 +31,7 @@ poetry-plugin-export = "*"
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.2"
 pytest-asyncio = "^0.23.8"
-pytest-xdist = "^3.6.1"
+pytest-subtests = "^0.13.1"
 
 [build-system]
 requires = ["poetry-core>=1.5.0"]
