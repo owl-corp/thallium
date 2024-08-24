@@ -12,6 +12,7 @@ class UserPermission(IntFlag):
     REVOKE_VOUCHERS = 2**1
     VIEW_PRODUCTS = 2**2
     MANAGE_USERS = 2**3
+    UPDATE_TEMPLATES = 2**4
 
 
 class User(BaseModel):

@@ -1,5 +1,5 @@
 from .login import VoucherClaim, VoucherLogin
-from .users import User
+from .users import User, UserPermission
 from .vouchers import Voucher
 
-__all__ = ("LoginData", "User", "Voucher", "VoucherClaim", "VoucherLogin")
+__all__ = ("LoginData", "User", "UserPermission", "Voucher", "VoucherClaim", "VoucherLogin")
