@@ -29,4 +29,7 @@ jobs:
 
       # Run `ruff` using github formatting to enable automatic inline annotations.
       - name: Run ruff
-        run: "ruff check --output-format=github ."
+        run: ruff check --output-format=github .
+
+      - name: Run tests
+        run: make test
