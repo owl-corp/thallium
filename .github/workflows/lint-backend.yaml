@@ -4,6 +4,16 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: backend
+          POSTGRES_PASSWORD: backend
+          POSTGRES_DB: backend
+        ports:
+          - 5432/tcp
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,3 +42,8 @@ jobs:
 
       - name: Run tests
         run: make test
+        env:
+          BACKEND_SIGNING_KEY: for-testing-use-only
+          BACKEND_DATABASE_URL: postgresql+psycopg_async://backend:backend@localhost:${{ job.services.postgres.ports[5432] }}/backend
+          BACKEND_SUPER_ADMIN_TOKEN: hunter2
+          BACKEND_PRINTFUL_TOKEN: not-valid
