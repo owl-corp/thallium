@@ -3,6 +3,7 @@ import logging
 from fastapi import APIRouter
 from sqlalchemy import select
 
+from src.auth import build_jwt
 from src.dto import Voucher
 from src.orm import Voucher as DBVoucher
 from src.settings import DBSession, PrintfulClient
@@ -47,3 +48,9 @@ async def get_vouchers(db: DBSession, *, only_active: bool = True) -> list[Vouch
         stmt = stmt.where(DBVoucher.active)
     res = await db.execute(stmt)
     return res.scalars().all()
+
+
+@router.get("/user-jwt/{user_id}")
+async def get_user_jwt(user_id: str) -> str:
+    """Return the user_id's JWT."""
+    return build_jwt(user_id, "user")
