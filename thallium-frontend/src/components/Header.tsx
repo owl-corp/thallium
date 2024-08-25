@@ -18,14 +18,23 @@ const HeaderContainer = styled.header`
   }
 `;
 
+const NoStyleLink = styled.a`
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+`;
 
 const Header = () => {
   return (
     <HeaderContainer>
-      <img src="icon.svg" alt="Thallium logo" />
-      <h1>
-        Thallium
-      </h1>
+      {/* FIXME: Try get this to use React router somehow for SPA routing */}
+      <NoStyleLink className="Header-bar" href="/">
+        <img src="icon.svg" alt="Thallium logo" />
+        <h1>
+          Thallium
+        </h1>
+      </NoStyleLink>
     </HeaderContainer>
   );
 };

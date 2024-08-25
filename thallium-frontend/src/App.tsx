@@ -26,14 +26,14 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  a {
+  a:not(.Header-bar) {
     color: ${({ theme }) => theme.linkColor};
     text-decoration: none;
     transition: border-bottom 0.2s;
     border-bottom: 1px dotted transparent;
   }
 
-  a:hover {
+  a:not(.Header-bar):hover {
     border-bottom: 1px dotted ${({ theme }) => theme.linkColor};
   }
 `;
