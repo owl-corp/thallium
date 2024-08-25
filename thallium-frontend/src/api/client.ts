@@ -4,6 +4,12 @@ TODO: Someday these methods should try pick out authentication from the Redux st
 
 const BASE_URL = THALLIUM_BASE_URL;
 
+export class APIMissingTokenError extends Error {
+    constructor() {
+        super("No token available");
+    }
+}
+
 interface APIErrorResponse {
     detail?: string;
 }

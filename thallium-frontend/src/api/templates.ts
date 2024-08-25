@@ -1,4 +1,4 @@
-import { get } from "./client";
+import { get, APIMissingTokenError } from "./client";
 import store from "../store";
 
 export interface Variant {
@@ -27,7 +27,7 @@ export const getTemplates = async (withVariants: boolean): Promise<Template[]> =
     const token = store.getState().authorization.voucherToken;
 
     if (!token) {
-        throw new Error("No token available");
+        throw new APIMissingTokenError();
     };
 
     return await get(`/templates/?with_variants=${withVariants.toString()}`, {

@@ -3,8 +3,10 @@ import { RootState } from "../store";
 import { useEffect, useState } from "react";
 
 import { Template, getTemplates } from "../api/templates";
+import { APIMissingTokenError } from "../api/client";
 import StoreItem from "../components/StoreItem";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StoreGrid = styled.div`
     display: grid;
@@ -17,11 +19,14 @@ const StoreGrid = styled.div`
 const StorePage = () => {
     const voucherToken = useSelector((state: RootState) => state.authorization.voucherToken);
     const [storeItems, setStoreItems] = useState<Template[] | null>(null);
+    const [permissionDenied, setPermissionDenied] = useState<boolean>(false);
 
     useEffect(() => {
         getTemplates(true).then(setStoreItems).catch((err: unknown) => {
             setStoreItems([]);
-            console.error(err);
+            if (err instanceof APIMissingTokenError) {
+                setPermissionDenied(true);
+            }
         });
     }, [voucherToken]);
 
@@ -33,7 +38,12 @@ const StorePage = () => {
                     <StoreItem key={item.template_id} template={item} />
                 ))}
             </StoreGrid>
-
+            {permissionDenied && (
+                <>
+                    <p>You need to have a valid voucher code to access the store.</p>
+                    <Link to="/">Redeem a voucher</Link>
+                </>
+            )}
         </>
     );
 };
