@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -8,12 +8,12 @@ import {
 import themes from "./themes.tsx";
 
 import Header from "./components/Header";
+import LoadingBar from "./components/LoadingBar";
 
-import LandingPage from "./pages/LandingPage";
-import ErrorPage from "./pages/ErrorPage";
-import DesignSystem from "./pages/DesignSystem";
-import StorePage from "./pages/StorePage";
-
+const LandingPage = React.lazy(() => import("./pages/LandingPage"));
+const ErrorPage = React.lazy(() => import("./pages/ErrorPage"));
+const DesignSystem = React.lazy(() => import("./pages/DesignSystem"));
+const StorePage = React.lazy(() => import("./pages/StorePage"));
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -101,7 +101,9 @@ function App() {
         <GlobalStyle />
         <ContentContainer>
           <Header />
-          <RouterProvider router={router} />
+          <Suspense fallback={<LoadingBar />}>
+            <RouterProvider router={router} />
+          </Suspense>
         </ContentContainer>
 
         <BodySeparator />
