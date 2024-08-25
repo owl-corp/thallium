@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { InputScale } from "./options";
 
+import Button from "../Button";
+
 
 interface TextInputProps {
     label: string;
@@ -49,27 +51,6 @@ const InputContainer = styled.div`
 `;
 
 
-const SubmitButton = styled.button`
-height: 2.5rem;
-padding-left: 1rem;
-padding-right: 1rem;
-font-family: inherit;
-border: none;
-background-color: ${({ theme }) => theme.accent};
-color: white;
-font-weight: bold;
-outline: 2px solid transparent;
-transition: outline 0.2s, filter 0.2s;
-filter: none;
-
-
-&:hover {
-    filter: brightness(0.8);
-    cursor: pointer;
-}
-`;
-
-
 const TextInput = ({ label, type, value, placeholder, scale, onChange, onSubmit, submitLabel }: TextInputProps) => {
     if (!scale) {
         scale = InputScale.Medium;
@@ -90,13 +71,13 @@ const TextInput = ({ label, type, value, placeholder, scale, onChange, onSubmit,
                     }
                 }}
             />
-            {onSubmit && <SubmitButton
+            {onSubmit && <Button
                 onClick={() => {
                     void onSubmit();
                 }}
             >
                 {submitLabel ? submitLabel : "Submit"}
-            </SubmitButton>}
+            </Button>}
         </InputContainer>
     );
 };
