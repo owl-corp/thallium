@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
 interface Theme {
+    selectedTheme: "light" | "dark";
     backgroundColor: string;
     textColor: string;
     borderColor: string;
@@ -23,17 +24,19 @@ const commonTheme = {
 
 const themes: ThemesStore = {
     light: {
+        selectedTheme: "light",
         backgroundColor: "#f0f0f0",
         textColor: "#000",
         borderColor: "#838383",
         linkColor: "#7272ff",
-        cardBackgroundColor: "#dddddd",
+        cardBackgroundColor: "#dbdbdb",
         cardShadow: "#d0d0d0",
         inputBackgroundColor: "#fff",
         inputPlaceholderColor: "#949494",
         ...commonTheme,
     },
     dark: {
+        selectedTheme: "dark",
         backgroundColor: "#333",
         textColor: "#fff",
         borderColor: "#949494",
