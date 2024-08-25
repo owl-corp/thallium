@@ -10,6 +10,7 @@ const CardContainer = styled.div<{ $seamless?: boolean; }>`
   box-shadow: 10px 10px 0 ${({ theme }) => theme.cardShadow};
 
   margin-top: ${({ $seamless }) => $seamless ? "0px" : "30px"};
+  overflow-wrap: break-word;
 `;
 
 const CardTitle = styled.div<{ $seamless?: boolean; }>`
