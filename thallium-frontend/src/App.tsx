@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import LandingPage from "./pages/LandingPage";
 import ErrorPage from "./pages/ErrorPage";
 import DesignSystem from "./pages/DesignSystem";
+import StorePage from "./pages/StorePage";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -41,7 +42,6 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 800px;
   height: 100%;
 `;
 
@@ -50,7 +50,11 @@ flex-grow: 1;
 `;
 
 const ContentContainer = styled.div`
-  padding: 1rem;
+  align-self: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const FooterHolder = styled.footer`
@@ -69,6 +73,11 @@ const router = createBrowserRouter([
   {
     path: "/design-system",
     element: <DesignSystem />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/store",
+    element: <StorePage />,
     errorElement: <ErrorPage />
   }
 ]);
