@@ -1,6 +1,7 @@
 import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 
 import Card from "../components/Card";
+import MaxWidthContainer from "../components/MaxWidthContainer";
 
 const ErrorPage = () => {
     const error = useRouteError();
@@ -26,12 +27,14 @@ const ErrorPage = () => {
         isUnexpected = true;
     }
 
-    return <Card title={title}>
-        {isUnexpected && <strong>An error occurred:</strong>}
-        <p>
-            {message}
-        </p>
-    </Card>;
+    return <MaxWidthContainer>
+        <Card title={title}>
+            {isUnexpected && <strong>An error occurred:</strong>}
+            <p>
+                {message}
+            </p>
+        </Card>
+    </MaxWidthContainer>;
 };
 
 export default ErrorPage;

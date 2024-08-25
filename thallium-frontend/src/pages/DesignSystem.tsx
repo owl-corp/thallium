@@ -1,8 +1,10 @@
 import Card from "../components/Card";
 
+import MaxWidthContainer from "../components/MaxWidthContainer";
+
 const DesignSystem = () => {
     return (
-        <>
+        <MaxWidthContainer>
             <h1>Design System</h1>
             <Card title="Card">
                 <p>This is a card component.</p>
@@ -13,7 +15,7 @@ const DesignSystem = () => {
                 </p>
             </Card>
 
-        </>
+        </MaxWidthContainer>
     );
 };
 

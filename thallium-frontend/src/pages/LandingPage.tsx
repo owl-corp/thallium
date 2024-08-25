@@ -1,9 +1,10 @@
 import Card from "../components/Card";
 import VoucherValidator from "../components/VoucherValidator";
+import MaxWidthContainer from "../components/MaxWidthContainer";
 
 const LandingPage = () => {
     return (
-        <>
+        <MaxWidthContainer>
             <Card title="Welcome to Thallium">
                 <p>
                     Thallium is a project being developed by Owl Corp.
@@ -25,7 +26,7 @@ const LandingPage = () => {
             </Card>
 
             <VoucherValidator />
-        </>
+        </MaxWidthContainer>
     );
 };
 
