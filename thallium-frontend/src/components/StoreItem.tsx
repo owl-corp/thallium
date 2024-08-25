@@ -222,7 +222,7 @@ const StoreItem: React.FC<StoreItemProps> = ({ template }: StoreItemProps) => {
             <h3>{template.title}</h3>
             <img src={template.mockup_file_url} alt={template.title} />
 
-            {colours === 1 && (
+            {(colours === 1 && uniqueColours.length > 1) && (
                 <div>
                     {uniqueColours.map((colour) => (
                         <ColourSwatch
@@ -263,9 +263,10 @@ const StoreItem: React.FC<StoreItemProps> = ({ template }: StoreItemProps) => {
                 ))}
             </SizeHolder>
 
-            {selectedVariant && (
+            {selectedVariant ?
                 <p>${selectedVariant.price} USD</p>
-            )}
+                : <p>Select a size to view price</p>
+            }
 
             <CartButton
                 disabled={selectedVariant === null}
