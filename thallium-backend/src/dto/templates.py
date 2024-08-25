@@ -20,8 +20,9 @@ class Variant(BaseModel):
     variant_id: int
     name: str
     size: str
-    colour: str
-    colour_code: str
+    colour: str | None
+    colour_code: str | None
+    colour_code2: str | None
     price: Decimal
     last_synced: datetime
 

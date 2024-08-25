@@ -45,8 +45,9 @@ class Variant(AuditBase, Base):
     variant_id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
     size: Mapped[str]
-    colour: Mapped[str]
-    colour_code: Mapped[str]
+    colour: Mapped[str] = mapped_column(nullable=True)
+    colour_code: Mapped[str] = mapped_column(nullable=True)
+    colour_code2: Mapped[str] = mapped_column(nullable=True)
     price: Mapped[Decimal]
     last_synced: Mapped[datetime] = mapped_column(DateTime(timezone=True))
 

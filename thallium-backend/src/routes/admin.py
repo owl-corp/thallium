@@ -43,6 +43,7 @@ async def sync_variants(variant_ids: list[int], db: DBSession, client: PrintfulC
                 "size": variant["size"],
                 "colour": variant["color"],
                 "colour_code": variant["color_code"],
+                "colour_code2": variant["color_code2"],
                 "price": variant["price"],
                 "last_synced": datetime.now(tz=UTC),
             }
@@ -55,6 +56,7 @@ async def sync_variants(variant_ids: list[int], db: DBSession, client: PrintfulC
             "size": stmt.excluded.size,
             "colour": stmt.excluded.colour,
             "colour_code": stmt.excluded.colour_code,
+            "colour_code2": stmt.excluded.colour_code2,
             "price": stmt.excluded.price,
             "last_synced": stmt.excluded.last_synced,
         },
