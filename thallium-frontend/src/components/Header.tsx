@@ -5,6 +5,7 @@ const HeaderContainer = styled.header`
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 
   img {
     width: 64px;
@@ -19,14 +20,14 @@ const HeaderContainer = styled.header`
 
 
 const Header = () => {
-    return (
-        <HeaderContainer>
-            <img src="icon.svg" alt="Thallium logo" />
-            <h1>
-                Thallium
-            </h1>
-        </HeaderContainer>
-    );
+  return (
+    <HeaderContainer>
+      <img src="icon.svg" alt="Thallium logo" />
+      <h1>
+        Thallium
+      </h1>
+    </HeaderContainer>
+  );
 };
 
 export default Header;
