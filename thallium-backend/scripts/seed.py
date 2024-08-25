@@ -22,7 +22,7 @@ async def create_vouchers(session: AsyncSession) -> None:
 async def create_users(session: AsyncSession) -> None:
     """Create some test vouchers in the db."""
     entries = [
-        {"permissions": UserPermission.VIEW_PRODUCTS | UserPermission.VIEW_VOUCHERS},
+        {"permissions": UserPermission.VIEW_TEMPLATES | UserPermission.VIEW_VOUCHERS},
         {"permissions": UserPermission.MANAGE_USERS},
         {"permissions": UserPermission.ISSUE_VOUCHERS | UserPermission.REVOKE_VOUCHERS},
         {"permissions": UserPermission.UPDATE_TEMPLATES},
