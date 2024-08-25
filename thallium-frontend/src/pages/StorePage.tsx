@@ -8,6 +8,9 @@ import StoreItem from "../components/StoreItem";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import LoadingBar from "../components/LoadingBar";
+
+
 const StoreGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -20,10 +23,15 @@ const StorePage = () => {
     const voucherToken = useSelector((state: RootState) => state.authorization.voucherToken);
     const [storeItems, setStoreItems] = useState<Template[] | null>(null);
     const [permissionDenied, setPermissionDenied] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        getTemplates(true).then(setStoreItems).catch((err: unknown) => {
+        getTemplates(true).then((items) => {
+            setStoreItems(items);
+            setLoading(false);
+        }).catch((err: unknown) => {
             setStoreItems([]);
+            setLoading(false);
             if (err instanceof APIMissingTokenError) {
                 setPermissionDenied(true);
             }
@@ -33,6 +41,7 @@ const StorePage = () => {
     return (
         <>
             <h1>Giveaway Store</h1>
+            {loading && <LoadingBar />}
             <StoreGrid>
                 {storeItems?.map((item) => (
                     <StoreItem key={item.template_id} template={item} />
