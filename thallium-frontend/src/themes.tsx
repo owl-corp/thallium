@@ -1,6 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 
 interface Theme {
+    // We expose the selected theme here in case that in addition to using colours
+    // component users want to apply different styles entirely based on the theme. (e.g. borders)
     selectedTheme: "light" | "dark";
     backgroundColor: string;
     textColor: string;
