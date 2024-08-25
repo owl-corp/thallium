@@ -17,6 +17,7 @@ const StoreGrid = styled.div`
     gap: 2rem;
     margin-left: 1rem;
     margin-right: 1rem;
+    width: 80%;
 `;
 
 const StorePage = () => {
