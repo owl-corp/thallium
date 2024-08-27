@@ -1,11 +1,12 @@
 import logging
+from datetime import UTC, datetime
 
 import argon2
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy import and_, select
 
-from src.auth import build_jwt
-from src.dto import PasswordReset, UserClaim, UserLogin, VoucherClaim, VoucherLogin
+from src.auth import TokenAuth, build_jwt
+from src.dto import JWTClaim, PasswordReset, UserClaim, UserLogin, VoucherClaim, VoucherLogin
 from src.orm import User as DBUser, Voucher as DBVoucher
 from src.settings import DBSession
 
@@ -87,6 +88,21 @@ async def handle_user_login(login_payload: UserLogin, db: DBSession) -> UserClai
         require_password_change=db_user.require_password_change,
         jwt=jwt,
     )
+
+
+@router.post("/refresh-token", dependencies=[Depends(TokenAuth(allow_regular_users=True, allow_vouchers=True))])
+async def refresh_jwt(request: Request) -> JWTClaim:
+    """Return a new JWT with a fresh 30 minute window."""
+    if hasattr(request.state, "user"):
+        user: DBUser = request.state.user
+        subject = user.id
+        user_type = "user"
+    elif hasattr(request.state, "voucher"):
+        voucher: DBVoucher = request.state.voucher
+        subject = voucher.id
+        user_type = "voucher"
+
+    return {"jwt": build_jwt(subject, user_type)}
 
 
 @router.post("/voucher-login")
