@@ -67,6 +67,9 @@ async def reset_user_password(db: DBSession, reset_payload: PasswordReset) -> No
         raise generic_failure_error
 
     db_user.password_hash = ph.hash(reset_payload.new_password)
+    db_user.password_set_at = datetime.now(UTC)
+    db_user.require_password_change = False
+    db_user.password_reset_code = None
 
 
 @router.post("/user-login")
