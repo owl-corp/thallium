@@ -77,10 +77,11 @@ def build_jwt(
     """Build & sign a jwt."""
     return jwt.encode(
         payload={
-            "sub": identifier,
+            "sub": str(identifier),
             "iss": f"thallium:{user_type}",
             "exp": datetime.now(tz=UTC) + timedelta(minutes=30),
             "nbf": datetime.now(tz=UTC) - timedelta(minutes=1),
+            "iat": datetime.now(tz=UTC),
         },
         key=CONFIG.signing_key.get_secret_value(),
     )
@@ -104,7 +105,7 @@ def verify_jwt(
             key=CONFIG.signing_key.get_secret_value(),
             issuer=issuers,
             algorithms=("HS256",),
-            options={"require": ["exp", "iss", "sub", "nbf"]},
+            options={"require": ["exp", "iss", "sub", "nbf", "iat"]},
         )
     except jwt.InvalidIssuerError as e:
         raise HTTPException(403, "Your user type does not have access to this resource") from e
