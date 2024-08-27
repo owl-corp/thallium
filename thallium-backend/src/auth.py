@@ -1,7 +1,6 @@
 import logging
 import typing as t
 from datetime import UTC, datetime, timedelta
-from enum import IntFlag
 from uuid import uuid4
 
 import jwt
@@ -15,13 +14,6 @@ from src.orm import User as DBUser, Voucher as DBVoucher
 from src.settings import CONFIG, DBSession
 
 log = logging.getLogger(__name__)
-
-
-class UserTypes(IntFlag):
-    """All types of users."""
-
-    VOUCHER_USER = 2**0
-    REGULAR_USER = 2**1
 
 
 class TokenAuth(HTTPBearer):
