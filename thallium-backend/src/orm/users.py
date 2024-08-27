@@ -16,7 +16,7 @@ class User(UUIDBase, AuditBase, Base):
     permissions: Mapped[int]
     password_set_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True))
     require_password_change: Mapped[bool] = mapped_column(default=True)
-    password_reset_code: Mapped[str] = mapped_column(nullable=True)
+    password_reset_code: Mapped[str] = mapped_column(nullable=True, unique=True)
     active: Mapped[bool] = mapped_column(default=True)
 
     __table_args__ = (

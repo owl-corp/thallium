@@ -22,7 +22,7 @@ def upgrade() -> None:
     op.add_column("users", sa.Column("username", sa.String(), nullable=False))
     op.add_column("users", sa.Column("password_hash", sa.String(), nullable=False))
     op.add_column("users", sa.Column("require_password_change", sa.Boolean(), nullable=False))
-    op.add_column("users", sa.Column("password_reset_code", sa.String(), nullable=True))
+    op.add_column("users", sa.Column("password_reset_code", sa.String(), nullable=True, unique=True))
     op.add_column("users", sa.Column("active", sa.Boolean(), nullable=False))
     op.add_column("users", sa.Column("password_set_at", sa.TIMESTAMP(timezone=True), nullable=False))
     op.create_unique_constraint(op.f("users_username_uq"), "users", ["username"])
