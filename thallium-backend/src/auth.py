@@ -72,7 +72,6 @@ class TokenAuth(HTTPBearer):
 
         if res.require_password_change:
             raise HTTPException(status_code=403, detail="You must reset your password.")
-        log.info(jwt_data["iat"])
         if datetime.fromtimestamp(jwt_data["iat"], tz=UTC) < res.password_set_at:
             raise HTTPException(status_code=403, detail="Token invalid, password changed.")
         return res
