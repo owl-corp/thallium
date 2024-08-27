@@ -1,16 +1,20 @@
 from pydantic import BaseModel
 
 
+class JWTClaim(BaseModel):
+    """A response with a JWT present."""
+
+    jwt: str
+
+
 class VoucherLogin(BaseModel):
     """The data needed to login with a voucher."""
 
     voucher_code: str
 
 
-class VoucherClaim(VoucherLogin):
+class VoucherClaim(VoucherLogin, JWTClaim):
     """A JWT for a verified voucher."""
-
-    jwt: str
 
 
 class UserLogin(BaseModel):
@@ -20,13 +24,12 @@ class UserLogin(BaseModel):
     password: str
 
 
-class UserClaim(BaseModel):
+class UserClaim(JWTClaim, BaseModel):
     """The response given to a successfully logged in user."""
 
     username: str
     permissions: int
     require_password_change: bool
-    jwt: str
 
 
 class PasswordReset(BaseModel):
