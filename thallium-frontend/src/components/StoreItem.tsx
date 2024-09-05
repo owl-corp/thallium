@@ -3,6 +3,11 @@ import styled from "styled-components";
 import { Template, Variant } from "../api/templates";
 import Button from "./forms/Button";
 
+import { addCartItem } from "../slices/cart";
+import store from "../store";
+
+import { toast } from "react-toastify";
+
 interface StoreItemProps {
     template: Template;
 }
@@ -270,6 +275,17 @@ const StoreItem: React.FC<StoreItemProps> = ({ template }: StoreItemProps) => {
 
             <CartButton
                 disabled={selectedVariant === null}
+                onClick={() => {
+                    if (selectedVariant) {
+                        store.dispatch(addCartItem({
+                            product_template_id: template.template_id,
+                            variant_id: selectedVariant.variant_id,
+                            estPrice: selectedVariant.price,
+                        }));
+
+                        toast("Item added to cart!");
+                    }
+                }}
             >Add to Cart</CartButton>
         </StoreItemContainer>
     );
