@@ -1,0 +1,6 @@
+:root {
+    --toastify-toast-bd-radius: 0px;
+    --toastify-color-progress-light: #bb86fc;
+    --toastify-color-dark: #252525;
+    --toastify-font-family: inherit;
+}
