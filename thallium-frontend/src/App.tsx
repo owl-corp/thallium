@@ -16,6 +16,11 @@ const DesignSystem = React.lazy(() => import("./pages/DesignSystem"));
 const StorePage = React.lazy(() => import("./pages/StorePage"));
 
 import { maybeRefreshTask } from "./api/jwt";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+import "./styles/toast-overrides.css";
+
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -101,6 +106,18 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <AppContainer>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme={isDarkMode ? "dark" : "light"}
+
+        />
         <GlobalStyle />
         <ContentContainer>
           <Header />
