@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import authorizationReducer from "./slices/authorization.ts";
+import cartReducer from "./slices/cart.ts";
 
 const rootReducer = combineReducers({
     authorization: authorizationReducer,
+    cart: cartReducer,
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {
