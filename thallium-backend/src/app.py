@@ -33,11 +33,6 @@ fastapi_app.add_middleware(
 )
 
 
-@fastapi_app.post("/test-204", status_code=204, tags=["AA-Test"])
-def test() -> None:
-    """Show off the issue with 204s in the API docs."""
-
-
 @fastapi_app.get("/heartbeat", include_in_schema=False)
 def health_check() -> JSONResponse:
     """Return basic response, for use as a health check."""
