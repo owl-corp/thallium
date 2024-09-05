@@ -1,4 +1,4 @@
-import { get, post } from "./client";
+import { get } from "./client";
 
 export interface Voucher {
     id: string;
@@ -13,10 +13,6 @@ export interface VoucherClaim {
     voucher_code: string;
     jwt: string;
 }
-
-export const validateVoucher = async (voucher_code: string): Promise<VoucherClaim> => {
-    return await post("/voucher-login", { voucher_code }) as unknown as VoucherClaim;
-};
 
 export const getCurrentVoucher = async (voucherJWT: string): Promise<Voucher> => {
     return await get("/vouchers/me", {
