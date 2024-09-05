@@ -49,11 +49,11 @@ export const get = async (url: string, options: RequestInit = {}): Promise<APIRe
 
 export const post = async (url: string, data: APIRequestBody, options: RequestInit = {}): Promise<APIResponseBody> => {
     return request(url, {
-        ...options,
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
+        ...options,
     });
 };
