@@ -3,12 +3,13 @@ import { RootState } from "../store";
 import { useEffect, useState } from "react";
 
 import { Template, getTemplates } from "../api/templates";
-import { APIMissingTokenError } from "../api/client";
+import { APIError, APIMissingTokenError } from "../api/client";
 import StoreItem from "../components/StoreItem";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import LoadingBar from "../components/LoadingBar";
+import CartStatus from "../components/CartStatus";
 
 
 const StoreGrid = styled.div`
@@ -35,6 +36,10 @@ const StorePage = () => {
             setLoading(false);
             if (err instanceof APIMissingTokenError) {
                 setPermissionDenied(true);
+            } else if (err instanceof APIError) {
+                if ([401, 403].includes(err.status)) {
+                    setPermissionDenied(true);
+                }
             }
         });
     }, [voucherToken]);
@@ -42,6 +47,7 @@ const StorePage = () => {
     return (
         <>
             <h1>Giveaway Store</h1>
+            {!(loading || permissionDenied) && <CartStatus />}
             {loading && <LoadingBar />}
             <StoreGrid>
                 {storeItems?.map((item) => (
