@@ -15,6 +15,8 @@ const ErrorPage = React.lazy(() => import("./pages/ErrorPage"));
 const DesignSystem = React.lazy(() => import("./pages/DesignSystem"));
 const StorePage = React.lazy(() => import("./pages/StorePage"));
 
+import { maybeRefreshTask } from "./api/jwt";
+
 const GlobalStyle = createGlobalStyle`
   html,
   body, #root {
@@ -86,6 +88,8 @@ const router = createBrowserRouter([
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  maybeRefreshTask();
+
   const theme = isDarkMode ? themes.dark : themes.light;
 
   useEffect(() => {
@@ -93,7 +97,6 @@ function App() {
 
     setIsDarkMode(prefersDark);
   }, []);
-
 
   return (
     <ThemeProvider theme={theme}>
