@@ -5,6 +5,7 @@ const authorizationSlice = createSlice({
     initialState: {
         voucherToken: null as string | null,
         userToken: null as string | null,
+        refreshTask: null as NodeJS.Timeout | null,
     },
     reducers: {
         setVoucherToken(state, action: { payload: string }) {
@@ -16,10 +17,13 @@ const authorizationSlice = createSlice({
         clearToken(state) {
             state.voucherToken = null;
             state.userToken = null;
+        },
+        setRefreshTask(state, action: { payload: NodeJS.Timeout }) {
+            state.refreshTask = action.payload;
         }
     },
 });
 
-export const { setVoucherToken, setUserToken, clearToken } = authorizationSlice.actions;
+export const { setVoucherToken, setUserToken, clearToken, setRefreshTask } = authorizationSlice.actions;
 
 export default authorizationSlice.reducer;

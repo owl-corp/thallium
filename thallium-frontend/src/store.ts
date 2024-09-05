@@ -18,6 +18,7 @@ const found = localStorage.getItem("authorizationState");
 let persistedState: RootState["authorization"] = {
     voucherToken: null,
     userToken: null,
+    refreshTask: null,
 };
 
 if (found) {
@@ -35,5 +36,9 @@ export type AppStore = ReturnType<typeof setupStore>;
 
 store.subscribe(() => {
     console.log("Serializing state to localStorage");
-    localStorage.setItem("authorizationState", JSON.stringify(store.getState().authorization));
+    const authState = store.getState().authorization;
+    localStorage.setItem("authorizationState", JSON.stringify({
+        voucherToken: authState.voucherToken,
+        userToken: authState.userToken,
+    }));
 });
