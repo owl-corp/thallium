@@ -8,8 +8,10 @@ export function useVisible(ref: RefObject<HTMLElement>) {
     const observer = new IntersectionObserver(
         ([entry]) => { setVisible(entry.isIntersecting); }
     );
+
     if (ref.current)
       observer.observe(ref.current);
+
     return () => { observer.disconnect(); };
   }, [ref]);
 
