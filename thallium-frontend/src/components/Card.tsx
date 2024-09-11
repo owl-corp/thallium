@@ -18,7 +18,7 @@ const CardTitle = styled.div<{ $seamless?: boolean; }>`
   top: -16px;
   left: 16px;
   background-color: ${({ theme }) => theme.cardBackgroundColor};
-  ${({ $seamless, theme }) => $seamless ? "" : `background: linear-gradient(0deg, ${theme.cardBackgroundColor} 0%, ${theme.cardBackgroundColor} 45%, ${theme.backgroundColor} 55%)`};
+  ${({ $seamless, theme }) => $seamless ? "" : `background: linear-gradient(0deg, ${theme.cardBackgroundColor}ff 0%, ${theme.cardBackgroundColor}ff 45%, ${theme.backgroundColor}ff 50%, ${theme.backgroundColor}00 50%)`};
   padding: 0 8px;
   font-weight: bold;
   z-index: 1;
@@ -29,15 +29,18 @@ interface CardProps {
   title: string;
   children: React.ReactNode;
   seamless?: boolean;
+  className?: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, children, seamless }: CardProps) => {
+const Card: React.FC<CardProps> = ({ title, children, seamless, className }: CardProps) => {
   return (
-    <CardContainer $seamless={seamless}>
+    <CardContainer $seamless={seamless} className={className}>
       <CardTitle $seamless={seamless}>{title}</CardTitle>
       {children}
     </CardContainer>
   );
 };
 
-export default Card;
+const StyledCard = styled(Card)``;
+
+export default StyledCard;
