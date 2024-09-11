@@ -35,7 +35,7 @@ const cartSlice = createSlice({
             if (existingItem) {
                 existingItem.quantity -= 1;
                 if (existingItem.quantity === 0) {
-                    let idx = state.cart.findIndex((item) => item.product_template_id === action.payload.product_template_id && item.variant_id === action.payload.variant_id);
+                    const idx = state.cart.findIndex((item) => item.product_template_id === action.payload.product_template_id && item.variant_id === action.payload.variant_id);
 
                     state.cart.splice(idx, 1);
                 }

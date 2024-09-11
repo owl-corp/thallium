@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../store"
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
 import { useState, useEffect } from "react";
 import { getTemplates, Template, Variant } from "../api/templates";
 import { APIError, APIMissingTokenError } from "../api/client";
@@ -39,7 +39,7 @@ img {
 }
 
 margin-bottom: 10px;
-`
+`;
 
 const CartItem: React.FC<CartItemProps> = ({ product, variant, quantity, cartItem }: CartItemProps) => {
     /* return <div>{product.title} - {variant.size} / {variant.colour} - {quantity} unit{quantity === 1 ? "" : "s"}</div> */
@@ -55,12 +55,12 @@ const CartItem: React.FC<CartItemProps> = ({ product, variant, quantity, cartIte
             <p><strong>Quantity:</strong> {quantity}</p>
         </div>
     <Button onClick={() => {
-        dispatch(removeCartItem(cartItem))
+        dispatch(removeCartItem(cartItem));
     }}>
           Remove
         </Button>
-    </CartItemHolder>
-}
+    </CartItemHolder>;
+};
 
 const CartConfirm = () => {
     const cart = useSelector((state: RootState) => state.cart);
@@ -100,7 +100,7 @@ const CartConfirm = () => {
             const variant = item?.variants?.find((variant) => variant.variant_id === cartItem.variant_id);
 
             if (item && variant) {
-                return <CartItem key={cartItem.variant_id} product={item} variant={variant} quantity={cartItem.quantity} cartItem={cartItem} />
+                return <CartItem key={cartItem.variant_id} product={item} variant={variant} quantity={cartItem.quantity} cartItem={cartItem} />;
             }
         })}
 
@@ -109,6 +109,6 @@ const CartConfirm = () => {
             <p>Return to the store page to add some items</p>
         </>}
     </>;
-}
+};
 
 export default CartConfirm;
