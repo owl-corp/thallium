@@ -1,18 +1,24 @@
 import { useState, useEffect, useMemo } from "react";
 import { type RefObject } from "react";
 
-export function useVisible(ref: RefObject<HTMLElement>) {
-  const [isVisible, setVisible] = useState(false);
+export function useVisible(ref: RefObject<HTMLElement>, initialState: boolean = false) {
+  const [isVisible, setVisible] = useState(initialState);
+
+  const intersectionObserver = useMemo(() => {
+    return new IntersectionObserver(
+      ([entry]) => { setVisible(entry.isIntersecting) },
+      {
+        threshold: 0.5
+      }
+    )
+  }, [ref]);
+
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-        ([entry]) => { setVisible(entry.isIntersecting); }
-    );
-
     if (ref.current)
-      observer.observe(ref.current);
+      intersectionObserver.observe(ref.current);
 
-    return () => { observer.disconnect(); };
+    return () => { intersectionObserver.disconnect(); };
   }, [ref]);
 
   return isVisible;

@@ -48,7 +48,7 @@ const CartStatus = () => {
     const price = cart.cart.reduce((acc, item) => acc + (parseFloat(item.estPrice) * item.quantity), 0);
 
     const staticButtonRef = useRef<HTMLButtonElement>(null);
-    const buttonVisible = useVisible(staticButtonRef);
+    const buttonVisible = useVisible(staticButtonRef, true);
 
     const checkoutMsg = total > 0 ? "Confirm & Checkout >" : "Add some items to proceed to checkout";
 
