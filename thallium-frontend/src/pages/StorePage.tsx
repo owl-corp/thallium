@@ -10,6 +10,10 @@ import { Link } from "react-router-dom";
 
 import LoadingBar from "../components/LoadingBar";
 import CartStatus from "../components/CartStatus";
+import { getCurrentVoucher, Voucher } from "../api/vouchers";
+import VoucherDisplay from "../components/Voucher";
+import { setMaxPrice } from "../slices/cart";
+import store from "../store";
 
 
 const StoreGrid = styled.div`
@@ -27,6 +31,8 @@ const StorePage = () => {
     const [permissionDenied, setPermissionDenied] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
+    const [currentVoucher, setCurrentVoucher] = useState<Voucher | null>(null);
+
     useEffect(() => {
         getTemplates(true).then((items) => {
             setStoreItems(items);
@@ -42,12 +48,29 @@ const StorePage = () => {
                 }
             }
         });
+
+        if (voucherToken) {
+            getCurrentVoucher().then((voucher) => {
+                setCurrentVoucher(voucher);
+                store.dispatch(setMaxPrice(parseFloat(voucher.balance)));
+            }).catch((err: unknown) => {
+                if (err instanceof APIMissingTokenError) {
+                    setPermissionDenied(true);
+                } else if (err instanceof APIError) {
+                    if ([401, 403].includes(err.status)) {
+                        setPermissionDenied(true);
+                    }
+                }
+            }
+            );
+        }
     }, [voucherToken]);
 
     return (
         <>
             <h1>Giveaway Store</h1>
             {!(loading || permissionDenied) && <CartStatus />}
+            {currentVoucher && <VoucherDisplay voucher={currentVoucher} />}
             {loading && <LoadingBar />}
             <StoreGrid>
                 {storeItems?.map((item) => (
