@@ -22,7 +22,7 @@ transition: all 0.25s;
 ${Card} {
   box-shadow: none;
 }
-`
+`;
 
 const FloatingButton = styled(Button) <{ $visible: boolean }>`
 position: fixed;
