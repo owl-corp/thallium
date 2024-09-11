@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface CartItem {
+export interface CartItem {
     product_template_id: number,
     quantity: number,
     variant_id: number,
@@ -35,7 +35,9 @@ const cartSlice = createSlice({
             if (existingItem) {
                 existingItem.quantity -= 1;
                 if (existingItem.quantity === 0) {
-                    state.cart = state.cart.filter((item) => item.product_template_id !== action.payload.product_template_id && item.variant_id !== action.payload.variant_id);
+                    let idx = state.cart.findIndex((item) => item.product_template_id === action.payload.product_template_id && item.variant_id === action.payload.variant_id);
+
+                    state.cart.splice(idx, 1);
                 }
             }
         },
