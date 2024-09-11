@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
