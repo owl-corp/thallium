@@ -21,7 +21,7 @@ margin-bottom: 30px;
 right: 0;
 margin-right: 30px;
 transition: all 0.25s;
-`
+`;
 
 const CartStatus = () => {
     const cart = useSelector((state: RootState) => state.cart);
@@ -32,16 +32,16 @@ const CartStatus = () => {
     const buttonVisible = useVisible(staticButtonRef);
 
     useEffect(() => {
-        console.log(buttonVisible)
-    }, [buttonVisible])
+        console.log(buttonVisible);
+    }, [buttonVisible]);
 
-    const checkoutMsg = total > 0 ? "Checkout >" : "Add some items to proceed to checkout"
+    const checkoutMsg = total > 0 ? "Checkout >" : "Add some items to proceed to checkout";
 
     const navigate = useNavigate();
 
     const buttonCallback = () => {
         navigate("/checkout");
-    }
+    };
 
     return <>
         <StatusHolder>You currently have {total} item{total !== 1 ? "s" : null} in your cart, totalling ${price.toFixed(2)} USD</StatusHolder>
