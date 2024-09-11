@@ -293,7 +293,7 @@ const StoreItem: React.FC<StoreItemProps> = ({ template }: StoreItemProps) => {
                             estPrice: selectedVariant.price,
                         }));
 
-                        toast("Item added to cart!");
+                        toast.success("Item added to cart!");
                     }
                 }}
             >Add to Cart</CartButton>
