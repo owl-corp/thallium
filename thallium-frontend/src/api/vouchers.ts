@@ -1,4 +1,5 @@
-import { get } from "./client";
+import { APIMissingTokenError, get } from "./client";
+import store from "../store";
 
 export interface Voucher {
     id: string;
@@ -14,10 +15,16 @@ export interface VoucherClaim {
     jwt: string;
 }
 
-export const getCurrentVoucher = async (voucherJWT: string): Promise<Voucher> => {
+export const getCurrentVoucher = async (): Promise<Voucher> => {
+    const { voucherToken } = store.getState().authorization;
+
+    if (!voucherToken) {
+        throw new APIMissingTokenError();
+    }
+
     return await get("/vouchers/me", {
         headers: {
-            Authorization: `Bearer ${voucherJWT}`,
+            Authorization: `Bearer ${voucherToken}`,
         },
     }) as unknown as Voucher;
 };
