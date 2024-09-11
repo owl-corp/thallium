@@ -1,4 +1,5 @@
 import Card from "../components/Card";
+import CartConfirm from "../components/CartConfirm";
 import MaxWidthContainer from "../components/MaxWidthContainer";
 import Button from "../components/forms/Button";
 import { useNavigate } from "react-router-dom";
@@ -12,8 +13,7 @@ const CheckoutPage = () => {
             navigate("/store");
         }}>&lt; Return to store</Button>
         <Card title="Cart">
-            {/* TODO */}
-            Not yet implemented.
+            <CartConfirm/>
         </Card>
     </MaxWidthContainer>;
 };
