@@ -4,9 +4,10 @@ import { Template, Variant } from "../api/templates";
 import Button from "./forms/Button";
 
 import { addCartItem } from "../slices/cart";
-import store from "../store";
+import store, { RootState } from "../store";
 
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 interface StoreItemProps {
     template: Template;
@@ -192,6 +193,9 @@ const StoreItem: React.FC<StoreItemProps> = ({ template }: StoreItemProps) => {
 
     const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null);
 
+    const maxPrice: number | null = useSelector<RootState>((state) => state.cart.maxPrice) as number | null;
+    const cartBalance: number = useSelector<RootState>((state) => state.cart.cart.reduce((acc, item) => acc + (parseFloat(item.estPrice) * item.quantity), 0)) as number;
+
 
     useEffect(() => {
         if (selectedColour === null) {
@@ -277,6 +281,12 @@ const StoreItem: React.FC<StoreItemProps> = ({ template }: StoreItemProps) => {
                 disabled={selectedVariant === null}
                 onClick={() => {
                     if (selectedVariant) {
+                        if (maxPrice !== null) {
+                            if (cartBalance + parseFloat(selectedVariant.price) > maxPrice) {
+                                toast.error("You do not have enough balance to purchase this item.");
+                                return;
+                            }
+                        }
                         store.dispatch(addCartItem({
                             product_template_id: template.template_id,
                             variant_id: selectedVariant.variant_id,
