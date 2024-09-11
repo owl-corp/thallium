@@ -8,6 +8,7 @@ import StoreItem from "../components/StoreItem";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import Card from "../components/Card";
 import LoadingBar from "../components/LoadingBar";
 import CartStatus from "../components/CartStatus";
 import { getCurrentVoucher, Voucher } from "../api/vouchers";
@@ -22,6 +23,7 @@ const StoreGrid = styled.div`
     gap: 2rem;
     margin-left: 1rem;
     margin-right: 1rem;
+    margin-top: 2rem;
     width: 80%;
 `;
 
@@ -70,7 +72,7 @@ const StorePage = () => {
         <>
             <h1>Giveaway Store</h1>
             {!(loading || permissionDenied) && <CartStatus />}
-            {currentVoucher && <VoucherDisplay voucher={currentVoucher} />}
+            {currentVoucher && <Card title="Active Voucher"><VoucherDisplay voucher={currentVoucher} /></Card>}
             {loading && <LoadingBar />}
             <StoreGrid>
                 {storeItems?.map((item) => (
