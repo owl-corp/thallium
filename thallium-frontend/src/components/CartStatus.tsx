@@ -34,7 +34,7 @@ const CartStatus = () => {
     const total = cart.cart.reduce((acc, item) => acc + item.quantity, 0);
     const price = cart.cart.reduce((acc, item) => acc + (parseFloat(item.estPrice) * item.quantity), 0);
 
-    const staticButtonRef = useRef<Button>(null);
+    const staticButtonRef = useRef<HTMLButtonElement>(null);
     const buttonVisible = useVisible(staticButtonRef);
 
     useEffect(() => {
