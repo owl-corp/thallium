@@ -21,6 +21,7 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/toast-overrides.css";
+import { useMediaQuery } from "./utils/hooks.ts";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -97,17 +98,11 @@ const router = createBrowserRouter([
 
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   maybeRefreshTask();
 
   const theme = isDarkMode ? themes.dark : themes.light;
-
-  useEffect(() => {
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    setIsDarkMode(prefersDark);
-  }, []);
 
   return (
     <ThemeProvider theme={theme}>
