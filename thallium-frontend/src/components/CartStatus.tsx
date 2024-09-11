@@ -1,18 +1,30 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 import Button from "./forms/Button";
 import { useNavigate } from "react-router-dom";
 import { useVisible } from "../utils/hooks";
+import Card from "./Card";
 
 const StatusHolder = styled.span`
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-
+margin-top: 1rem;
+margin-bottom: 1rem;
 `;
 
-const FloatingButton = styled(Button)<{ $visible: boolean }>`
+const FloatingStatusHolder = styled(StatusHolder) <{ $visible: boolean }>`
+position: fixed;
+z-index: 10;
+margin-top: 2rem;
+opacity: ${(props) => props.$visible ? "1" : "0"};
+transition: all 0.25s;
+
+${Card} {
+  box-shadow: none;
+}
+`
+
+const FloatingButton = styled(Button) <{ $visible: boolean }>`
 position: fixed;
 z-index: 10;
 opacity: ${(props) => props.$visible ? "1" : "0"};
@@ -21,6 +33,7 @@ margin-bottom: 30px;
 right: 0;
 margin-right: 30px;
 transition: all 0.25s;
+font-size: 1.1em;
 `;
 
 const DetailsSpan = styled.span`
@@ -37,11 +50,7 @@ const CartStatus = () => {
     const staticButtonRef = useRef<HTMLButtonElement>(null);
     const buttonVisible = useVisible(staticButtonRef);
 
-    useEffect(() => {
-        console.log(buttonVisible);
-    }, [buttonVisible]);
-
-    const checkoutMsg = total > 0 ? "Checkout >" : "Add some items to proceed to checkout";
+    const checkoutMsg = total > 0 ? "Confirm & Checkout >" : "Add some items to proceed to checkout";
 
     const navigate = useNavigate();
 
@@ -49,8 +58,15 @@ const CartStatus = () => {
         navigate("/checkout");
     };
 
+    const statusDetails = <>You currently have <DetailsSpan>{total}</DetailsSpan> item{ total !== 1 ? "s" : null } in your cart, totalling < DetailsSpan > ${ price.toFixed(2) } USD</DetailsSpan></>;
+
     return <>
-        <StatusHolder>You currently have <DetailsSpan>{total}</DetailsSpan> item{total !== 1 ? "s" : null} in your cart, totalling <DetailsSpan>${price.toFixed(2)} USD</DetailsSpan></StatusHolder>
+        <StatusHolder>{statusDetails}</StatusHolder>
+        <FloatingStatusHolder $visible={!buttonVisible}>
+            <Card title="Your cart">
+            {statusDetails}
+            </Card>
+        </FloatingStatusHolder>
         <Button ref={staticButtonRef} disabled={total === 0} onClick={buttonCallback}>
             {checkoutMsg}
         </Button>
