@@ -39,7 +39,7 @@ const themes: ThemesStore = {
     },
     dark: {
         selectedTheme: "dark",
-        backgroundColor: "#333",
+        backgroundColor: "#303030",
         textColor: "#fff",
         borderColor: "#949494",
         linkColor: "#8f8fff",
