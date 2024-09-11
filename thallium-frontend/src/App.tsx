@@ -14,6 +14,7 @@ const LandingPage = React.lazy(() => import("./pages/LandingPage"));
 const ErrorPage = React.lazy(() => import("./pages/ErrorPage"));
 const DesignSystem = React.lazy(() => import("./pages/DesignSystem"));
 const StorePage = React.lazy(() => import("./pages/StorePage"));
+const CheckoutPage = React.lazy(() => import("./pages/CheckoutPage"));
 
 import { maybeRefreshTask } from "./api/jwt";
 import { ToastContainer } from "react-toastify";
@@ -85,6 +86,11 @@ const router = createBrowserRouter([
   {
     path: "/store",
     element: <StorePage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/checkout",
+    element: <CheckoutPage />,
     errorElement: <ErrorPage />
   }
 ]);
