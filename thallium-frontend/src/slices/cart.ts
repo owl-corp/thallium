@@ -11,6 +11,7 @@ const cartSlice = createSlice({
     name: "cart",
     initialState: {
         cart: [] as CartItem[],
+        maxPrice: null as number | null,
     },
     reducers: {
         addCartItem(state, action: { payload: { product_template_id: number, variant_id: number, estPrice: string } }) {
@@ -38,9 +39,12 @@ const cartSlice = createSlice({
                 }
             }
         },
+        setMaxPrice(state, action: { payload: number }) {
+            state.maxPrice = action.payload;
+        }
     },
 });
 
-export const { addCartItem, removeCartItem } = cartSlice.actions;
+export const { addCartItem, removeCartItem, setMaxPrice } = cartSlice.actions;
 
 export default cartSlice.reducer;
