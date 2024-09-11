@@ -51,6 +51,8 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  margin-left: 10px;
+  margin-right: 10px;
   height: 100%;
 `;
 
