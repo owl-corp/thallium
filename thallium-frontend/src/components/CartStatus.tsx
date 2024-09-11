@@ -27,7 +27,7 @@ const DetailsSpan = styled.span`
 color: ${(props) => props.theme.accent};
 font-weight: bold;
 font-size: 1.1em;
-`
+`;
 
 const CartStatus = () => {
     const cart = useSelector((state: RootState) => state.cart);

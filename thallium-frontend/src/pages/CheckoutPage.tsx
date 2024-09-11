@@ -15,7 +15,7 @@ const CheckoutPage = () => {
             {/* TODO */}
             Not yet implemented.
         </Card>
-    </MaxWidthContainer>
+    </MaxWidthContainer>;
 };
 
 export default CheckoutPage;
