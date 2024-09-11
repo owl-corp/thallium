@@ -23,6 +23,12 @@ margin-right: 30px;
 transition: all 0.25s;
 `;
 
+const DetailsSpan = styled.span`
+color: ${(props) => props.theme.accent};
+font-weight: bold;
+font-size: 1.1em;
+`
+
 const CartStatus = () => {
     const cart = useSelector((state: RootState) => state.cart);
     const total = cart.cart.reduce((acc, item) => acc + item.quantity, 0);
@@ -44,7 +50,7 @@ const CartStatus = () => {
     };
 
     return <>
-        <StatusHolder>You currently have {total} item{total !== 1 ? "s" : null} in your cart, totalling ${price.toFixed(2)} USD</StatusHolder>
+        <StatusHolder>You currently have <DetailsSpan>{total}</DetailsSpan> item{total !== 1 ? "s" : null} in your cart, totalling <DetailsSpan>${price.toFixed(2)} USD</DetailsSpan></StatusHolder>
         <Button ref={staticButtonRef} disabled={total === 0} onClick={buttonCallback}>
             {checkoutMsg}
         </Button>
