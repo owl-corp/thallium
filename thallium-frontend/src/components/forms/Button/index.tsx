@@ -22,7 +22,6 @@ filter: none;
 &[disabled] {
     filter: brightness(0.5);
     cursor: not-allowed;
-    text-decoration: line-through;
 }
 `;
 
