@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useVisible } from "../utils/hooks";
 import Card from "./Card";
 
-const StatusHolder = styled.span`
+const StatusHolder = styled.div`
 margin-top: 1rem;
 margin-bottom: 1rem;
 `;
@@ -42,6 +42,10 @@ font-weight: bold;
 font-size: 1.1em;
 `;
 
+const CartStatusContainer = styled.div`
+text-align: center;
+`;
+
 const CartStatus = () => {
     const cart = useSelector((state: RootState) => state.cart);
     const total = cart.cart.reduce((acc, item) => acc + item.quantity, 0);
@@ -58,18 +62,26 @@ const CartStatus = () => {
         navigate("/checkout");
     };
 
-    const statusDetails = <>You currently have <DetailsSpan>{total}</DetailsSpan> item{ total !== 1 ? "s" : null } in your cart, totalling < DetailsSpan > ${ price.toFixed(2) } USD</DetailsSpan></>;
+    const statusDetails = (
+        <>
+            You currently have <DetailsSpan>{total}</DetailsSpan> item{ total !== 1 ? "s" : null } in your cart, totalling <DetailsSpan>${ price.toFixed(2) } USD</DetailsSpan>
+        </>
+    );
 
     return <>
-        <StatusHolder>{statusDetails}</StatusHolder>
+        <Card title="Your Cart">
+            <CartStatusContainer>
+                <StatusHolder>{statusDetails}</StatusHolder>
+                <Button ref={staticButtonRef} disabled={total === 0} onClick={buttonCallback}>
+                    {checkoutMsg}
+                </Button>
+            </CartStatusContainer>
+        </Card>
         <FloatingStatusHolder $visible={!buttonVisible}>
-            <Card title="Your cart">
+            <Card title="Your Cart">
             {statusDetails}
             </Card>
         </FloatingStatusHolder>
-        <Button ref={staticButtonRef} disabled={total === 0} onClick={buttonCallback}>
-            {checkoutMsg}
-        </Button>
         <FloatingButton $visible={!buttonVisible && total > 0} onClick={buttonCallback}>
             {checkoutMsg}
         </FloatingButton>
