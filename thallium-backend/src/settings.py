@@ -29,6 +29,7 @@ class _Config(
     database_url: pydantic.SecretStr
     super_admin_token: pydantic.SecretStr
     printful_token: pydantic.SecretStr
+    printful_store_id: pydantic.SecretStr
 
     app_prefix: str = ""
     templates: Jinja2Templates = Jinja2Templates(directory="src/templates")
@@ -49,7 +50,10 @@ class Connections:
 async def _get_printful_client() -> AsyncGenerator[httpx.AsyncClient, None]:
     """Yield an authenticated httpx client for printful, for use with a FastAPI dependency."""
     client = httpx.AsyncClient(
-        headers={"Authorization": f"Bearer {CONFIG.printful_token.get_secret_value()}"},
+        headers={
+            "Authorization": f"Bearer {CONFIG.printful_token.get_secret_value()}",
+            "X-PF-Store-Id": CONFIG.printful_store_id.get_secret_value(),
+        },
         base_url="https://api.printful.com",
     )
     async with client as c:
