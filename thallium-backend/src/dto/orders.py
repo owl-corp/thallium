@@ -43,6 +43,10 @@ class OrderCreate(BaseModel):
             "external_id": voucher.id,
             "recipient": self.recipient.model_dump(),
             "items": [item.model_dump() for item in self.items],
+            "gift": {
+                "subject": f"To {self.recipient.name}",
+                "message": "Love from your local DevOps team.",
+            },
         }
 
 
