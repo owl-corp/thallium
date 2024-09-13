@@ -26,6 +26,7 @@ class OrderItem(BaseModel):
 
     product_template_id: int
     variant_id: int
+    quantity: int
 
 
 class OrderCreate(BaseModel):
