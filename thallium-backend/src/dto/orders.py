@@ -2,6 +2,8 @@ from decimal import Decimal
 
 from pydantic import BaseModel
 
+from src.dto import Voucher
+
 
 class OrderRecipient(BaseModel):
     """Information about the recipient of the order."""
@@ -35,9 +37,10 @@ class OrderCreate(BaseModel):
     recipient: OrderRecipient
     items: list[OrderItem]
 
-    def as_printful_payload(self) -> dict:
+    def as_printful_payload(self, voucher: Voucher) -> dict:
         """Return this order in the format used by Printful's API."""
         return {
+            "external_id": voucher.id,
             "recipient": self.recipient.model_dump(),
             "items": [item.model_dump() for item in self.items],
         }
