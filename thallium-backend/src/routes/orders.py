@@ -21,8 +21,6 @@ async def create_order(request: Request, db: DBSession, client: PrintfulClient, 
     If the voucher does not have enough funds, the order is cancelled.
     """
     voucher: Voucher = request.state.voucher
-    stmt = select(DBVoucher).where(DBVoucher.id == voucher.id).with_for_update()
-    db_voucher = await db.scalar(stmt)
 
     resp = await client.post(
         "/orders/estimate-costs",
@@ -31,6 +29,9 @@ async def create_order(request: Request, db: DBSession, client: PrintfulClient, 
     )
     resp.raise_for_status()
     cost = OrderCosts.model_validate(resp.json()["result"]["costs"])
+
+    stmt = select(DBVoucher).where(DBVoucher.id == voucher.id).with_for_update()
+    db_voucher = await db.scalar(stmt)
     if cost.total > db_voucher.balance:
         raise HTTPException(
             status_code=400,
