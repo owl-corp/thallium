@@ -47,3 +47,4 @@ jobs:
           BACKEND_DATABASE_URL: postgresql+psycopg_async://backend:backend@localhost:${{ job.services.postgres.ports[5432] }}/backend
           BACKEND_SUPER_ADMIN_TOKEN: hunter2
           BACKEND_PRINTFUL_TOKEN: not-valid
+          BACKEND_PRINTFUL_STORE_ID: 12345
