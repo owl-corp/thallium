@@ -9,10 +9,10 @@ class UserPermission(IntFlag):
 
     VIEW_VOUCHERS = 2**0
     ISSUE_VOUCHERS = 2**1
-    REVOKE_VOUCHERS = 2**1
-    MANAGE_USERS = 2**2
-    VIEW_TEMPLATES = 2**3
-    UPDATE_TEMPLATES = 2**4
+    REVOKE_VOUCHERS = 2**2
+    MANAGE_USERS = 2**3
+    VIEW_TEMPLATES = 2**4
+    UPDATE_TEMPLATES = 2**5
 
 
 class User(BaseModel):
