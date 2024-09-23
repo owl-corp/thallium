@@ -1,8 +1,10 @@
+import typing as t
 from decimal import Decimal
 
 from pydantic import BaseModel
 
-from src.dto import Voucher
+if t.TYPE_CHECKING:
+    from src.dto import Voucher
 
 
 class OrderRecipient(BaseModel):
@@ -37,7 +39,7 @@ class OrderCreate(BaseModel):
     recipient: OrderRecipient
     items: list[OrderItem]
 
-    def as_printful_payload(self, voucher: Voucher) -> dict:
+    def as_printful_payload(self, voucher: "Voucher") -> dict:
         """Return this order in the format used by Printful's API."""
         return {
             "external_id": voucher.id,
